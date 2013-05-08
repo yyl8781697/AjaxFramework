@@ -8,7 +8,7 @@ AjaxFramework
 Now AjaxFramewok can help you do it.you only need reference the AjaxFramework.dll and Wirte the Attribute before the 
 head of method,the method is change to be a web method and you can visit it by url or by ajax.
 *****
-Example(these method is in class "data"):
+Example(these method is in class "**data**"):
 ```cs
 [WebMethodAttr(RequestType.Get)]
 public float Add(float a, float b)
@@ -72,4 +72,4 @@ you only config it in web.config and add the httphandler of AjaxHandlerFactory<b
 ```
 *****
 Do you han any question that you can write in this project.<br />
-Wecome to develop this project together.
+Welcome to develop this project together.
