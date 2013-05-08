@@ -3,8 +3,8 @@ AjaxFramework
 
 #A Framework about ajax in donnet
 
-*Do you hate so many *.ashx file in your web project.
-*Do you like visit the general c# method by ajax but not like webservice?
+#####五Do you hate so many *.ashx file in your web project.<br />
+#####五Do you like visit the general c# method by ajax but not like webservice?<br />
 Now AjaxFramewok can help you do it.you only need reference the AjaxFramework.dll and Wirte the Attribute before the 
 head of method,the method is change to be a web method and you can visit it by url or by ajax.
 *****
@@ -62,12 +62,12 @@ If the returnType of method is not a sample type.the program the Serializate it 
 ```
 it will show in the page for json code.
 *****
-Now ,How use the framwork,it is easy.
-you only config it in web.config and add the httphandler of AjaxHandlerFactory
-IIS6.0
-<add verb="*" path="*.ajax" validate="true" type="AjaxFramework.AjaxHandlerFactory,AjaxFramework" />
+Now ,How use the framwork,it is easy.<br />
+you only config it in web.config and add the httphandler of AjaxHandlerFactory<br />
+IIS6.0<br />
+<add verb="*" path="*.ajax" validate="true" type="AjaxFramework.AjaxHandlerFactory,AjaxFramework" /><br />
 IIS7.0
 <add name="ajaxhandler" verb="*" preCondition="integratedMode" path="*.ajax"  type="AjaxFramework.AjaxHandlerFactory,AjaxFramework" />
 *****
-Do you han any question that you can write in this project.
+Do you han any question that you can write in this project.<br />
 Wecome to develop this project together.
