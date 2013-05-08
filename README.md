@@ -3,8 +3,8 @@ AjaxFramework
 
 #A Framework about ajax in donnet
 
-#####五Do you hate so many *.ashx file in your web project.<br />
-#####五Do you like visit the general c# method by ajax but not like webservice?<br />
+#####Do you hate so many *.ashx file in your web project.<br />
+#####Do you like visit the general c# method by ajax but not like webservice?<br />
 Now AjaxFramewok can help you do it.you only need reference the AjaxFramework.dll and Wirte the Attribute before the 
 head of method,the method is change to be a web method and you can visit it by url or by ajax.
 *****
@@ -41,33 +41,33 @@ Oh,It is no easy.
 If the returnType of method is not a sample type.the program the Serializate it to json.
 ```cs 
 [WebMethodAttr(RequestType.Get)]
-        public DataTable Get_Data()
-        {
-            DataTable dt = new DataTable("dt");
-            dt.Columns.Add("id");
-            dt.Columns.Add("name");
+public DataTable Get_Data()
+{
+      DataTable dt = new DataTable("dt");
+      dt.Columns.Add("id");
+      dt.Columns.Add("name");
 
-            DataRow row = dt.NewRow();
-            row["id"] = 1;
-            row["name"] = "tom";
-            dt.Rows.Add(row);
+      DataRow row = dt.NewRow();
+      row["id"] = 1;
+      row["name"] = "tom";
+      dt.Rows.Add(row);
 
-            DataRow row2 = dt.NewRow();
-            row2["id"] = 2;
-            row2["name"] = "peter";
-            dt.Rows.Add(row2);
+      DataRow row2 = dt.NewRow();
+      row2["id"] = 2;
+      row2["name"] = "peter";
+      dt.Rows.Add(row2);
 
-            return dt;
-        }
+      return dt;
+}
 ```
 it will show in the page for json code.
 *****
 Now ,How use the framwork,it is easy.<br />
 you only config it in web.config and add the httphandler of AjaxHandlerFactory<br />
 IIS6.0<br />
-<add verb="*" path="*.ajax" validate="true" type="AjaxFramework.AjaxHandlerFactory,AjaxFramework" /><br />
+&ltadd verb="*" path="*.ajax" validate="true" type="AjaxFramework.AjaxHandlerFactory,AjaxFramework" /&gt<br />
 IIS7.0
-<add name="ajaxhandler" verb="*" preCondition="integratedMode" path="*.ajax"  type="AjaxFramework.AjaxHandlerFactory,AjaxFramework" />
+&ltadd name="ajaxhandler" verb="*" preCondition="integratedMode" path="*.ajax"  type="AjaxFramework.AjaxHandlerFactory,AjaxFramework" /&gt
 *****
 Do you han any question that you can write in this project.<br />
 Wecome to develop this project together.
