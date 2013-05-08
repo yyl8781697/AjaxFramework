@@ -3,7 +3,7 @@ AjaxFramework
 
 #A Framework about ajax in donnet
 
-#####Do you hate so many *.ashx file in your web project.<br />
+#####Do you hate so many *.ashx file in your web project?<br />
 #####Do you like visit the general c# method by ajax but not like webservice?<br />
 Now AjaxFramewok can help you do it.you only need reference the AjaxFramework.dll and Wirte the Attribute before the 
 head of method,the method is change to be a web method and you can visit it by url or by ajax.
