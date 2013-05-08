@@ -65,9 +65,11 @@ it will show in the page for json code.
 Now ,How use the framwork,it is easy.<br />
 you only config it in web.config and add the httphandler of AjaxHandlerFactory<br />
 IIS6.0<br />
+```xml
 &ltadd verb="*" path="*.ajax" validate="true" type="AjaxFramework.AjaxHandlerFactory,AjaxFramework" /&gt<br />
 IIS7.0
 &ltadd name="ajaxhandler" verb="*" preCondition="integratedMode" path="*.ajax"  type="AjaxFramework.AjaxHandlerFactory,AjaxFramework" /&gt
+```
 *****
 Do you han any question that you can write in this project.<br />
 Wecome to develop this project together.
