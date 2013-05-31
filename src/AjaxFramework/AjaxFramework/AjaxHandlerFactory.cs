@@ -10,6 +10,8 @@ namespace AjaxFramework
 {
     public class AjaxHandlerFactory : IHttpHandlerFactory
     {
+      
+    
         public IHttpHandler GetHandler(HttpContext context,
                         string requestType, string virtualPath, string physicalPath)
         {

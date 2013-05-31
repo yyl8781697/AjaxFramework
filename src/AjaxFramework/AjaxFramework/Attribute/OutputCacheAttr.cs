@@ -40,23 +40,23 @@ namespace AjaxFramework
             base.IsValidate();
             
             //检查当前是否有缓存标志
-            if (base.CurrentHttpRequest.Context.Request.Headers.AllKeys.Contains(CACHE_KEY))
+            if (base.CurHttpRequest.Context.Request.Headers.AllKeys.Contains(CACHE_KEY))
             {
-                DateTime dt = Convert.ToDateTime(base.CurrentHttpRequest.Context.Request.Headers[CACHE_KEY]);
+                DateTime dt = Convert.ToDateTime(base.CurHttpRequest.Context.Request.Headers[CACHE_KEY]);
                 //判断是否在缓存时间内
                 if ((DateTime.Now - dt).TotalSeconds < this._cacheSecond)
                 {
                     //在缓存时间里面  这里会输出304的头部 并且停止页面的输出
                     //通知客户端以缓存输出
-                    base.CurrentHttpRequest.Context.Response.StatusCode = 304;
-                    base.CurrentHttpRequest.Context.Response.End();
+                    base.CurHttpRequest.Context.Response.StatusCode = 304;
+                    base.CurHttpRequest.Context.Response.End();
                     return true;
                 }
             }
 
             // 设置最近修改的响应头Last-Modified，客户端将会发送If-Modified-Since到服务器端
             // 配合上面代码实现缓存
-            base.CurrentHttpRequest.Context.Response.Cache.SetLastModified(DateTime.Now);
+            base.CurHttpRequest.Context.Response.Cache.SetLastModified(DateTime.Now);
 
             return true;
         }

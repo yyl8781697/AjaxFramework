@@ -31,10 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -52,15 +48,15 @@
     <Compile Include="Attribute\WebMethodAttr.cs" />
     <Compile Include="Attribute\WebParameterAttr.cs" />
     <Compile Include="Core\IAjax.cs" />
+    <Compile Include="Core\MethodCache.cs" />
     <Compile Include="Core\MethodHelper.cs" />
     <Compile Include="Core\ParameterHelper.cs" />
     <Compile Include="Core\ReflectionHelper.cs" />
     <Compile Include="Core\ResponseHandler.cs" />
-    <Compile Include="Core\ResponseHelper.cs" />
     <Compile Include="Core\UrlConfig.cs" />
     <Compile Include="Enum\RequestType.cs" />
     <Compile Include="Exception\AjaxException.cs" />
-    <Compile Include="Exception\MethodNotFoundOrInvalidException.cs" />
+    <Compile Include="Exception\Ajax404Exception.cs" />
     <Compile Include="Extension\CheckData\CheckDataContext.cs" />
     <Compile Include="Extension\CheckData\CheckDataStrategy.cs" />
     <Compile Include="Extension\CheckData\CheckDate.cs" />
@@ -68,6 +64,11 @@
     <Compile Include="Extension\CheckData\CheckInt.cs" />
     <Compile Include="Extension\CheckData\CheckString.cs" />
     <Compile Include="Extension\CheckData\ErrorMsg.cs" />
+    <Compile Include="Extension\ResponseData\ResponseDataContext.cs" />
+    <Compile Include="Extension\ResponseData\ResponseXml.cs" />
+    <Compile Include="Extension\ResponseData\ResponseJson.cs" />
+    <Compile Include="Extension\ResponseData\ResponseDataStrategy.cs" />
+    <Compile Include="Extension\ResponseData\ResponseString.cs" />
     <Compile Include="Extension\SampleDataExtension.cs" />
     <Compile Include="Model\AjaxResult.cs" />
     <Compile Include="Model\CustomMethodInfo.cs" />
@@ -76,6 +77,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Example.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\LitJson\LitJson\LitJson.csproj">
+      <Project>{517DF037-79B2-43DE-BB2D-4D46643E4E1B}</Project>
+      <Name>LitJson</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy $(TargetDir)\$(TargetFileName) $(ProjectDir)\..\..\..\lib  /y</PostBuildEvent>

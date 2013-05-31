@@ -23,7 +23,7 @@ namespace TestBLL
         /// <summary>
         /// 年龄
         /// </summary>
-        public int Age { get; set; }
+        public System.Decimal Age { get; set; }
 
         /// <summary>
         /// 生日

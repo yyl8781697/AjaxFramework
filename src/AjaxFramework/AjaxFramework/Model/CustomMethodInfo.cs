@@ -28,9 +28,9 @@ namespace AjaxFramework
         public Type RetureType { get; set; }
 
         /// <summary>
-        /// 该方法的当前实例
+        /// 该方法所属类的类型 须用此类型来动态创建类
         /// </summary>
-        public object Instance { get; set; }
+        public Type ClassType { get; set; }
 
         /// <summary>
         /// 方法的所属程序集
@@ -51,6 +51,17 @@ namespace AjaxFramework
         /// 该方法的特性列表
         /// </summary>
         public List<ValidateAttr> AttrList { get; set; }
+
+        /// <summary>
+        /// 得到当前web标志的特性 得不到时返回false
+        /// </summary>
+        public WebMethodAttr CurWebMethodAttr
+        {
+            get {
+                WebMethodAttr webMethodAttr = this.AttrList.Find(x => x is WebMethodAttr) as WebMethodAttr;
+                return webMethodAttr;
+            }
+        }
     }
     #endregion
 }

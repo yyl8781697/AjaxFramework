@@ -35,6 +35,8 @@ namespace AjaxFramework
             base.PriorityLevel = 8000;
         }
 
+     
+
         /// <summary>
         /// 验证access_token是否通过 验证项：是否为空 是否存在 是否在有效期呢
         /// 验证method name 即方法名 该方法是否包含在scope调用权限中
@@ -43,7 +45,7 @@ namespace AjaxFramework
         public override bool IsValidate()
         {
             base.IsValidate();
-            if (string.IsNullOrEmpty(base.CurrentHttpRequest.Context.Request[KEY_ACCESS_TOKEN]))
+            if (string.IsNullOrEmpty(base.CurHttpRequest.Context.Request[KEY_ACCESS_TOKEN]))
             {
                 throw new AjaxException("准许令牌access_token不能为空");
             }
@@ -54,17 +56,17 @@ namespace AjaxFramework
             }
 
             OAuthParams oAuthParams=new OAuthParams(){
-                AccessToken = base.CurrentHttpRequest.WebParameters[KEY_ACCESS_TOKEN],
-             MethodName=base.CurrentHttpRequest.CurrentMethodInfo.Method.Name.ToLower()
+                AccessToken = base.CurHttpRequest.WebParameters[KEY_ACCESS_TOKEN],
+             MethodName=base.CurHttpRequest.CurrentMethodInfo.Method.Name.ToLower()
             };
 
             //执行检查参数事件
             if(CheckAuthoration(oAuthParams))
             {
                 //验证通过
-                NameValueCollection webParameters = new NameValueCollection(base.CurrentHttpRequest.WebParameters);
+                NameValueCollection webParameters = new NameValueCollection(base.CurHttpRequest.WebParameters);
                 webParameters.Add("username", oAuthParams.UserName);
-                base.CurrentHttpRequest.WebParameters = webParameters;
+                base.CurHttpRequest.WebParameters = webParameters;
                 return true;
             }else{
                 return false;

@@ -11,7 +11,7 @@ namespace AjaxFramework
         /// <summary>
         /// 当前的请求的详细信息
         /// </summary>
-        public HttpRequestDescription CurrentHttpRequest { get; set; }
+        internal HttpRequestDescription CurHttpRequest { get; set; }
 
         /// <summary>
         /// 优先等级 数字越大等级越高
@@ -32,7 +32,7 @@ namespace AjaxFramework
         /// <returns>验证通过返回true，否则，返回false</returns>
         public virtual bool IsValidate()
         {
-            if (this.CurrentHttpRequest.Context == null)
+            if (this.CurHttpRequest.Context == null)
             {
                 throw new AjaxException("没有得到当前的上下文");
             }

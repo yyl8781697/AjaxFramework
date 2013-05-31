@@ -8,7 +8,7 @@ namespace AjaxFramework
 {
     public class Example:IAjax
     {
-        [WebMethodAttr(RequestType.Get)]
+        [WebMethodAttr(CurRequestType = RequestType.Get)]
         public int Add(int a, int b)
         {
             return a + b;

@@ -50,6 +50,8 @@ namespace AjaxFramework
             this._strategy.CurrentData = data;
         }
 
+        
+
         /// <summary>
         /// 检查数据
         /// </summary>

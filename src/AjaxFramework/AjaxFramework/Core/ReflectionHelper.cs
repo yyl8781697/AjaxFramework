@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-
+using System.Reflection.Emit;
 
 namespace AjaxFramework
 {
     /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public delegate object CtorDelegate();
+
+    /// <summary>
     /// 反射的帮助类
     /// </summary>
-    internal class ReflectionHelper
+    internal static class ReflectionHelper
     {
         #region 获取该方法的特性列表
         /// <summary>
@@ -53,61 +59,95 @@ namespace AjaxFramework
 
         #endregion
 
+        #region 得到方法的最基本的信息
         /// <summary>
-        /// 得到类的实例类型
+        /// 得到方法的最基本的信息
         /// </summary>
-        /// <param name="assemlyString">程序集路径/命名空间</param>
-        /// <param name="className">实例名称 不需要含程序集</param>
         /// <returns></returns>
-        public static object GetClassType(string assemlyString,string className)
+        public static CustomMethodInfo GetMethodBaseInfo(MethodPathInfo methodPathInfo, BindingFlags bindingAttr)
         {
-            Type t = null;
-            //加载指定程序集
-            Assembly assembly=Assembly.Load(assemlyString);
-            //得到该类的类型
-            t = assembly.GetType(className);
-
-            return t;
+            CustomMethodInfo customMethodInfo = new CustomMethodInfo();
+            try
+            {
+                //得到程序集
+                customMethodInfo.Assembly = Assembly.Load(methodPathInfo.Assembly);
+                //得到类的类型
+                Type t = customMethodInfo.Assembly.GetType(methodPathInfo.Assembly + "." + methodPathInfo.ClassName, true, true);
+                //得到类的类型
+                customMethodInfo.ClassType = t;
+                //得到方法
+                customMethodInfo.Method = t.GetMethod(methodPathInfo.MethodName, bindingAttr);
+                if (customMethodInfo.Method == null)
+                {
+                    //没有得到方法 把整个信息置空
+                    customMethodInfo = null;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            return customMethodInfo;
         }
+        #endregion
+
+        #region 动态创建实例相关
+        /// <summary>
+        /// 缓存
+        /// </summary>
+        private static IDictionary<string, CtorDelegate> _dictCtor = new Dictionary<string, CtorDelegate>(1024);
 
         /// <summary>
-        /// 得到方法实例
+        /// 创建一个实例   参考http://www.cnblogs.com/fish-li/ 博客的mymvc框架的设计
         /// </summary>
-        /// <param name="assemlyString">程序集路径/命名空间</param>
-        /// <param name="className">方法的实例</param>
-        /// <param name="methodName">方法的名称</param>
-        /// <param name="bindingAttr">该方法的条件</param>
+        /// <param name="instanceType">实例的类型</param>
         /// <returns></returns>
-        public static MethodInfo GetMethod(string assemlyString, string className,string methodName,BindingFlags bindingAttr)
-        {
-            MethodInfo methodInfo=null;
-            //加载指定程序集
-            Assembly assembly = Assembly.Load(assemlyString);
-            //得到该类的类型
-            Type t = assembly.GetType(className);
-            //得到指定的方法
-            methodInfo = t.GetMethod(methodName, bindingAttr);
+        public static object CreateInstace(this Type instanceType)
+        { 
+            if( instanceType == null )
+				throw new ArgumentNullException("instanceType");
 
-            return methodInfo;
+            CtorDelegate ctor;
+            if(_dictCtor.Keys.Contains(instanceType.FullName))
+            {
+                //先尝试从缓存中取数据
+                ctor = _dictCtor[instanceType.FullName];
+            }else{
+				ConstructorInfo ctorInfo = instanceType.GetConstructor(Type.EmptyTypes);
+				ctor = CreateConstructor(ctorInfo);
+                _dictCtor[instanceType.FullName] = ctor;
+			}
+
+			return ctor();
         }
-
-        /// <summary>
-        /// 得到方法的实例
-        /// </summary>
-        /// <param name="t">方法所在类的类型</param>
-        /// <param name="methodName">方法的名称</param>
-        /// <param name="bindingAttr">获取方法的过滤条件</param>
-        /// <returns></returns>
-        public static MethodInfo GetMethod(Type t, string methodName, BindingFlags bindingAttr)
-        {
-            MethodInfo methodInfo = null;
-            //得到指定的方法
-            methodInfo = t.GetMethod(methodName, bindingAttr);
-
-            return methodInfo;
-        }
-
         
+        /// <summary>
+        /// 创建构造函数 空参数构造函数
+        /// </summary>
+        /// <param name="constructor"></param>
+        /// <returns></returns>
+        public static CtorDelegate CreateConstructor(ConstructorInfo constructor)
+        {
+            if (constructor == null)
+                throw new ArgumentNullException("constructor");
+            if (constructor.GetParameters().Length > 0)
+                throw new NotSupportedException("不支持有参数的构造函数。");
+
+            DynamicMethod dm = new DynamicMethod(
+                "ctor",
+                constructor.DeclaringType,
+                Type.EmptyTypes,
+                true);
+
+            ILGenerator il = dm.GetILGenerator();
+            il.Emit(OpCodes.Nop);
+            il.Emit(OpCodes.Newobj, constructor);
+            il.Emit(OpCodes.Ret);
+
+            return (CtorDelegate)dm.CreateDelegate(typeof(CtorDelegate));
+        }
+
+        #endregion
 
 
 

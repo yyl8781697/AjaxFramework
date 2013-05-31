@@ -18,12 +18,8 @@ namespace AjaxFramework
         /// <summary>
         /// 请求类型/方式 get post
         /// </summary>
-        public RequestType CurrentReuqestType { get; private set; }
+        public RequestType CurRequestType { get; set; }
 
-        /// <summary>
-        /// 默认的返回头
-        /// </summary>
-        private string _contentType = "application/json";
         /// <summary>
         /// 输出的内容类型
         /// <para>常用类型：</para>
@@ -31,28 +27,61 @@ namespace AjaxFramework
         /// <para>application/json(默认)</para>
         /// <para>image/*</para>
         /// </summary>
-        public string ContentType
+        public string CurContentType
         {
-            get
-            {
-                return this._contentType;
-            }
-            set
-            {
-                this._contentType = value;
-            }
+            get;
+            set;
         }
         #endregion
 
+        #region 构造函数
+
         /// <summary>
-        /// 构造函数
+        /// 构造函数 默认post请求，json输出
         /// </summary>
-        /// <param name="type"></param>
-        public WebMethodAttr(RequestType reuqestType)
+        public WebMethodAttr()
         {
-            this.CurrentReuqestType = reuqestType;
+            //设置默认的请求和返回头部
+            CurRequestType = RequestType.Post;
+            CurContentType = ContentType.JSON;
             base.PriorityLevel = 9999;
         }
+
+        /// <summary>
+        /// 构造函数 设置请求类型
+        /// </summary>
+        /// <param name="requestType">请求类型</param>
+        public WebMethodAttr(RequestType requestType)
+        {
+            CurRequestType = requestType;
+            CurContentType = ContentType.JSON;
+            base.PriorityLevel = 9999;
+        }
+
+        /// <summary>
+        /// 构造函数 设置输出文本类型
+        /// </summary>
+        /// <param name="contentType">输出文本类型 可使用ContentType常量</param>
+        public WebMethodAttr(string contentType)
+        {
+            CurRequestType = RequestType.Post;
+            CurContentType = ContentType.JSON;
+            base.PriorityLevel = 9999;
+        }
+
+        /// <summary>
+        /// 构造函数 设置请求类型 设置输出文本类型
+        /// </summary>
+        /// <param name="requestType">请求类型</param>
+        /// <param name="contentType">输出文本类型 可使用ContentType常量</param>
+        public WebMethodAttr(RequestType requestType,string contentType)
+        {
+            CurRequestType = requestType;
+            CurContentType = contentType;
+            base.PriorityLevel = 9999;
+        }
+
+        #endregion
 
         #region 验证特征的有效性
         /// <summary>
@@ -64,19 +93,19 @@ namespace AjaxFramework
             base.IsValidate();
             bool ret = false;
 
-            if (RequestType.All.Equals(this.CurrentReuqestType))
+            if (RequestType.All.Equals(this.CurRequestType))
             {
                 ret = true;
             }
             else
             {
-                if (base.CurrentHttpRequest.Context.Request.RequestType.Equals(this.CurrentReuqestType.ToString().ToUpper()))
+                if (base.CurHttpRequest.Context.Request.RequestType.Equals(this.CurRequestType.ToString().ToUpper()))
                 {
                     ret = true;
                 }
                 else
                 {
-                    throw new MethodNotFoundOrInvalidException(string.Format("此方法无法用{0}方式进行访问", base.CurrentHttpRequest.Context.Request.RequestType));
+                    throw new Ajax404Exception(string.Format("此页面无法用{0}方式进行访问", base.CurHttpRequest.Context.Request.RequestType));
                 }
             }
 
@@ -97,21 +126,53 @@ namespace AjaxFramework
                 throw new AjaxException("请求的上下文为空");
             }
             NameValueCollection webParameters;
-            switch (this.CurrentReuqestType.ToString().ToUpper())
+            switch (this.CurRequestType.ToString().ToUpper())
             {
                 case "POST":
-                    webParameters = context.Request.Form;
+                    webParameters = new NameValueCollection(context.Request.Form);
                     break;
                 case "GET":
-                    webParameters = context.Request.QueryString;
+                    webParameters = new NameValueCollection(context.Request.QueryString);
                     break;
                 default:
-                    webParameters = context.Request.Params;
+                    //默认的话 get和post都可以取
+                    webParameters =new NameValueCollection(context.Request.Form);
+                    webParameters.Add(context.Request.QueryString);
                     break;
             }
             return webParameters;
         }
         #endregion
+    }
 
+    /// <summary>
+    /// 网页返回的头部类型
+    /// </summary>
+    public struct ContentType
+    {
+        /// <summary>
+        /// json格式
+        /// </summary>
+        public const string JSON = "application/json";
+
+        /// <summary>
+        /// 直接输出html格式
+        /// </summary>
+        public const string HTML = "text/plain";
+
+        /// <summary>
+        /// xml格式
+        /// </summary>
+        public const string XML = "application/xml";
+
+        /// <summary>
+        /// 文件格式
+        /// </summary>
+        public const string FILE = "application/octet-stream";
+
+        /// <summary>
+        /// 图片类型 你也可以写其他的  比如image/jpreg  image/png
+        /// </summary>
+        public const string IMAGE = "image/gif";
     }
 }

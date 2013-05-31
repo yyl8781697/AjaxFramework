@@ -36,6 +36,8 @@ namespace AjaxFramework
 
         }
 
+        
+
         /// <summary>
         /// 得到方法的一些基本的路径信息
         /// </summary>
@@ -56,6 +58,7 @@ namespace AjaxFramework
                 methodPathInfo.ClassName = match.Groups["classname"].Value;
                 methodPathInfo.MethodName = match.Groups["methodname"].Value;
                 methodPathInfo.Assembly = ASSEMBLY;
+                
             }
             return methodPathInfo;
 

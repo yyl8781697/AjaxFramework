@@ -138,10 +138,13 @@ namespace AjaxFramework
             {
                 throw new ArgumentNullException("parameter name or type is null");
             }
-            this.Value = base.CurrentHttpRequest.WebParameters[this.Name] == null ? "" : base.CurrentHttpRequest.WebParameters[this.Name];
+            this.Value = base.CurHttpRequest.WebParameters[this.Name] == null ? "" : base.CurHttpRequest.WebParameters[this.Name];
             CheckDataContext dataContext=new CheckDataContext(this);
             return dataContext.CheckData();
         }
         #endregion
+
+       
+
     }
 }

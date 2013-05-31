@@ -50,7 +50,7 @@ namespace AjaxFramework
             if (!string.IsNullOrEmpty(this.ErrorMsg))
             {
                 //有错误了 添加上错误信息
-                list.Add("\"error_msg\":\"" + this.ErrorMsg + "\"");
+                list.Add("\"errorMsg\":\"" + this.ErrorMsg + "\"");
             }
             
             if (this.KeyValueDict != null && this.KeyValueDict.Count > 0)
