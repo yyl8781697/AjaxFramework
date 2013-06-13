@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace AjaxFramework
 {
@@ -44,13 +45,13 @@ namespace AjaxFramework
             if (this.Data != null)
             {
                 //给data赋过值了
-                list.Add("\"data\":\"" + this.Data + "\"");
+                list.Add("\"data\":\"" + ReplaceJsonChar(this.Data) + "\"");
             }
             
             if (!string.IsNullOrEmpty(this.ErrorMsg))
             {
                 //有错误了 添加上错误信息
-                list.Add("\"errorMsg\":\"" + this.ErrorMsg + "\"");
+                list.Add("\"errorMsg\":\"" + ReplaceJsonChar(this.ErrorMsg) + "\"");
             }
             
             if (this.KeyValueDict != null && this.KeyValueDict.Count > 0)
@@ -62,6 +63,27 @@ namespace AjaxFramework
             }
             //合并成json字符串并返回
             return "{" + string.Join(",", list.ToArray()) + "}";
+        }
+
+        /// <summary>
+        /// 输出文本 即Data或ErrorMsg的其中有值的一个
+        /// </summary>
+        /// <returns></returns>
+        public string ToText()
+        {
+            return string.IsNullOrEmpty(this.Data) ? this.ErrorMsg : this.Data;
+        }
+
+        /// <summary>
+        /// 替换json的特殊字符
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        private string ReplaceJsonChar(string str)
+        {
+            Regex r = new Regex("(['\"\r\n])");
+            str = r.Replace(str, "");
+            return str;
         }
     }
     #endregion

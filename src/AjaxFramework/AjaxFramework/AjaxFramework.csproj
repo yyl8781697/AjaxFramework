@@ -47,6 +47,7 @@
     <Compile Include="Attribute\ValidateAttr.cs" />
     <Compile Include="Attribute\WebMethodAttr.cs" />
     <Compile Include="Attribute\WebParameterAttr.cs" />
+    <Compile Include="Core\DynamicMethodHelper.cs" />
     <Compile Include="Core\IAjax.cs" />
     <Compile Include="Core\MethodCache.cs" />
     <Compile Include="Core\MethodHelper.cs" />
@@ -54,9 +55,11 @@
     <Compile Include="Core\ReflectionHelper.cs" />
     <Compile Include="Core\ResponseHandler.cs" />
     <Compile Include="Core\UrlConfig.cs" />
+    <Compile Include="Core\DebugeLog.cs" />
     <Compile Include="Enum\RequestType.cs" />
     <Compile Include="Exception\AjaxException.cs" />
     <Compile Include="Exception\Ajax404Exception.cs" />
+    <Compile Include="Extension\BatchJson.cs" />
     <Compile Include="Extension\CheckData\CheckDataContext.cs" />
     <Compile Include="Extension\CheckData\CheckDataStrategy.cs" />
     <Compile Include="Extension\CheckData\CheckDate.cs" />
@@ -64,6 +67,13 @@
     <Compile Include="Extension\CheckData\CheckInt.cs" />
     <Compile Include="Extension\CheckData\CheckString.cs" />
     <Compile Include="Extension\CheckData\ErrorMsg.cs" />
+    <Compile Include="Extension\GetRequestData\GetRequestBatchJosnData.cs" />
+    <Compile Include="Extension\GetRequestData\GetRequestDataContext.cs" />
+    <Compile Include="Extension\GetRequestData\GetRequestDataStrategy.cs" />
+    <Compile Include="Extension\GetRequestData\GetRequestEntityData.cs" />
+    <Compile Include="Extension\GetRequestData\GetRequestFileData.cs" />
+    <Compile Include="Extension\GetRequestData\GetRequestSampleTypeData.cs" />
+    <Compile Include="Extension\GetRequestData\GetResquestListData.cs" />
     <Compile Include="Extension\ResponseData\ResponseDataContext.cs" />
     <Compile Include="Extension\ResponseData\ResponseXml.cs" />
     <Compile Include="Extension\ResponseData\ResponseJson.cs" />

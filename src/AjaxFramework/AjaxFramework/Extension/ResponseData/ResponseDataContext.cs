@@ -33,19 +33,19 @@ namespace AjaxFramework
             //输出Json格式
             if (ContentType.JSON.Equals(contentType, StringComparison.OrdinalIgnoreCase))
             {
-                this._strategy = new ResponseJson();
+                this._strategy = ResponseJson.GetInstance();
                 return;
             }
 
             //输出Xml格式
             if (ContentType.XML.Equals(contentType, StringComparison.OrdinalIgnoreCase))
             {
-                this._strategy = new ResponseXml();
+                this._strategy = ResponseXml.GetInstance();
                 return;
             }
 
             //其余 文本头部 图片头部 文件头部 只需直接输出文本均可
-            this._strategy = new ResponseString();
+            this._strategy = ResponseString.GetInstance();
         }
 
         /// <summary>
@@ -65,7 +65,12 @@ namespace AjaxFramework
         /// <param name="str">要输出的字符串</param>
         public string GetResponse(string str)
         {
-            return _strategy.GetResponse(str, typeof(string));
+            AjaxResult ajaxResult = new AjaxResult()
+            {
+                Flag = "0",
+                ErrorMsg = str
+            };
+            return _strategy.GetResponse(ajaxResult, typeof(AjaxResult));
         }
     }
 }

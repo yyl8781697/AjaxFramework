@@ -1,0 +1,17 @@
+AjaxFramework-v1.0  --2013-4-xx
+1:已完成了基本bs调用cs端的功能
+
+AjaxFramework-v1.1  --2013-5-31
+1:修复了在调用过程中一直使用单例的问题
+2:添加了多类型的输出  比如xml,image,html
+3:将json的序列化组件从newtomsoft.json转到了litjson
+
+AjaxFramework-v1.2  --2013-6-5
+1:加了参数中json数组传值的支持
+2:将传值接收修改为策略模式，方便以后添加其他类型
+3:添加了开发中调试日志的支持 
+
+AjaxFramework-v1.3  --2013-6-6
+1:修复了在报错情况下抛出的错误键值不一致(errorMsg,error_msg)，现统一改为了errorMsg
+
+

@@ -37,7 +37,7 @@ namespace AjaxFramework
             string output = string.Empty;
             //初始化当前输出的上下文 默认Json
             this.reponseContext = new ResponseDataContext(contentType);
-
+            DebugeLog log=new DebugeLog();
             try
             {
                 //实例化当前请求的方法帮助类
@@ -48,36 +48,46 @@ namespace AjaxFramework
                 contentType = methodHelper.CurCustomMethodInfo.CurWebMethodAttr.CurContentType;
                 //再次初始化当前需要输出的上下文
                 this.reponseContext = new ResponseDataContext(contentType);
-
+                
                 if (methodHelper.CheckAttribute())
                 {
+                    log.Write("方法特性通过检查");
                     //用帮助类执行该方法
                     object ret = methodHelper.ExecMethod();
+                    log.Write("动态方法执行成功");
                     //得到需要输出的字符串
                     output = this.reponseContext.GetResponse(ret, methodHelper.CurCustomMethodInfo.RetureType);
                 }
-                
+
             }
             catch (ArgumentException args)
             {
+                log.Write(args);
                 //捕获参数异常
                 output = this.reponseContext.GetResponse(args.Message);
             }
             catch (Ajax404Exception ajax404)
             {
+                log.Write(ajax404);
                 //捕获404
                 context.Response.StatusCode = 404;
                 output = this.reponseContext.GetResponse(ajax404.Message);
             }
             catch (AjaxException ajaxErr)
             {
+                log.Write(ajaxErr);
                 //捕获自定义异常
                 output = this.reponseContext.GetResponse(ajaxErr.Message);
             }
             catch (Exception exError)
             {
+                log.Write(exError);
                 //捕获全部异常
                 output = this.reponseContext.GetResponse(exError.Message);
+            }
+            finally
+            {
+                log.Submit();
             }
 
             context.Response.ContentType = contentType;

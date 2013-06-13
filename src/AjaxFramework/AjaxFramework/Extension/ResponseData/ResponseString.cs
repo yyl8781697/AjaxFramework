@@ -9,8 +9,22 @@ namespace AjaxFramework
     /// <summary>
     /// 直接输出字符串
     /// </summary>
-    public class ResponseString:ResponseDataStrategy
+    public class ResponseString : ResponseDataStrategy
     {
+        private static ResponseString _instance = null;
+        /// <summary>
+        /// 得到当前的实例
+        /// </summary>
+        /// <returns></returns>
+        public static ResponseDataStrategy GetInstance()
+        {
+            if (_instance == null)
+            {
+                _instance = new ResponseString();
+            }
+            return _instance;
+        }
+
         /// <summary>
         /// 得到输出的数据
         /// </summary>
@@ -29,8 +43,13 @@ namespace AjaxFramework
                     //返回的是简单类型
                     ret = Convert.ToString(obj);
                 }
+                else if (obj is AjaxResult)
+                {
+                    ret = (obj as AjaxResult).ToText();
+                }
                 else
                 {
+
                     ret = JsonMapper.ToJson(obj);
                 }
             }

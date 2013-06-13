@@ -14,5 +14,11 @@ namespace AjaxFramework
             return a + b;
         }
         //rpc
+
+        public int Test(BatchJson<int> batch)
+        {
+            
+            return 1;
+        }
     }
 }

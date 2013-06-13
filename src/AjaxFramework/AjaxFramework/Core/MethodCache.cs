@@ -68,15 +68,15 @@ namespace AjaxFramework
 
             foreach (Assembly assembly in assemblies)
             {
-
-                if (UrlConfig.ASSEMBLY.Equals(assembly))
+                string assemblyName= assembly.GetName().Name;
+                if (UrlConfig.ASSEMBLY.Equals(assemblyName))
                 {
                     //如果在指定的ajax的业务的程序集中
 
                     //添加到程序集的缓存中
-                    if (!_idictAssemby.Keys.Contains(GetAssemblyName(assembly)))
+                    if (!_idictAssemby.Keys.Contains(assemblyName))
                     {
-                        _idictAssemby.Add(GetAssemblyName(assembly), assembly);
+                        _idictAssemby.Add(assemblyName, assembly);
                     }
 
                     try

@@ -52,7 +52,7 @@ namespace LitJson
         private bool                 pretty_print;
         private bool                 validate;
         private bool                 toUnicode=true;
-        private bool                 toCamelKey = true;
+        private bool                 toCamelKey = false;
         private TextWriter           writer;
         #endregion
 
@@ -520,7 +520,7 @@ namespace LitJson
                 }
                 else
                 {
-                    ret = m.Value.ToLower();
+                    ret=m.Value.ToLower();
                 }
                 return ret;
 

@@ -23,7 +23,7 @@ namespace TestBLL
 
         public Data(int a)
         { 
-        
+            
         }
 
         /// <summary>
@@ -32,18 +32,21 @@ namespace TestBLL
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        [WebMethodAttr]
+        [WebMethodAttr(CurRequestType=RequestType.All)]
         [WebParameterAttr("a", typeof(float), MinValue = 5)]
         [WebParameterAttr("b",typeof(float),RegexText=@"^[0-9]{1,3}[\.][0-9]{1,3}$",ErrorMsg="参数b必须是小数")]
         public float Add(float a, float b)
         {
+            
+            
             //object obj2 = System.Web.HttpContext.Current.Session;
             return a + b;
         }
 
-        [WebMethodAttr(ContentType.HTML)]
-        public int test()
+        [WebMethodAttr(CurRequestType=RequestType.All)]
+        public int test(BatchJson<User> batch)
         {
+            throw new ArgumentNullException("异常啊'\"\n");
             id++;
             return id;
         }
@@ -53,10 +56,11 @@ namespace TestBLL
         /// </summary>
         /// <returns></returns>
         [WebMethodAttr(CurRequestType = RequestType.Get,  CurContentType = ContentType.HTML)]
-        public string Get_Pat()
+        [OutputCacheAttr(20)]
+        public string Get_Pat(HttpPostedFile file)
         {
             
-            return "pat";
+            return "pat STATIC"+DateTime.Now;
         }
 
         /// <summary>
@@ -75,7 +79,7 @@ namespace TestBLL
         /// 返回DataTable的数据
         /// </summary>
         /// <returns></returns>
-        [WebMethodAttr(CurRequestType = RequestType.Get, CurContentType = ContentType.XML)]
+        [WebMethodAttr(CurRequestType = RequestType.Get, CurContentType = ContentType.JSON)]
         public DataTable Get_Data()
         {
             id++;
@@ -101,7 +105,7 @@ namespace TestBLL
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        [WebMethodAttr(CurRequestType = RequestType.Get,CurContentType=ContentType.XML)]
+        [WebMethodAttr(CurRequestType = RequestType.Get,CurContentType=ContentType.JSON)]
         public User Insert_User(User user)
         {
             return user;

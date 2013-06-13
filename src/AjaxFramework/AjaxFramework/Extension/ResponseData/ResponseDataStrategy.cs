@@ -10,6 +10,7 @@ namespace AjaxFramework
     /// </summary>
     public abstract class ResponseDataStrategy
     {
+
         /// <summary>
         /// 得到输出的数据
         /// </summary>

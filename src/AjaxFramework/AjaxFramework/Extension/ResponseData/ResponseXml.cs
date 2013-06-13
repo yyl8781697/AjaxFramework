@@ -12,6 +12,21 @@ namespace AjaxFramework
     /// </summary>
     public class ResponseXml:ResponseDataStrategy
     {
+
+        private static ResponseXml _instance = null;
+        /// <summary>
+        /// 得到当前的实例
+        /// </summary>
+        /// <returns></returns>
+        public static ResponseDataStrategy GetInstance()
+        {
+            if (_instance == null)
+            {
+                _instance = new ResponseXml();
+            }
+            return _instance;
+        }
+
         /// <summary>
         /// 得到输出的数据
         /// </summary>

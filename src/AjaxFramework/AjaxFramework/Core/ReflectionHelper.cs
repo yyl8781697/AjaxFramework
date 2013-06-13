@@ -11,6 +11,7 @@ namespace AjaxFramework
     /// <returns></returns>
     public delegate object CtorDelegate();
 
+
     /// <summary>
     /// 反射的帮助类
     /// </summary>
@@ -91,6 +92,35 @@ namespace AjaxFramework
         }
         #endregion
 
+        #region 到属性 里面有缓存处理
+        /// <summary>
+        /// 缓存 属性
+        /// </summary>
+        private static IDictionary<Type, PropertyInfo[]> _dictPropertyInfo = new Dictionary<Type, PropertyInfo[]>(1024);
+
+        /// <summary>
+        /// 得到属性 里面有缓存处理
+        /// </summary>
+        /// <param name="instanceType"></param>
+        /// <param name="bindingFlags"></param>
+        /// <returns></returns>
+        public static PropertyInfo[] GetPropertyInfos(this Type instanceType,BindingFlags bindingFlags)
+        {
+            if (instanceType == null)
+                throw new ArgumentNullException("instanceType");
+            PropertyInfo[] propertyInfos;
+            if (_dictPropertyInfo.ContainsKey(instanceType))
+            {
+                propertyInfos = _dictPropertyInfo[instanceType];
+            }
+            else {
+                propertyInfos = instanceType.GetProperties(bindingFlags);
+                _dictPropertyInfo.Add(instanceType, propertyInfos);
+            }
+            return propertyInfos;
+        }
+        #endregion
+
         #region 动态创建实例相关
         /// <summary>
         /// 缓存
@@ -149,7 +179,7 @@ namespace AjaxFramework
 
         #endregion
 
-
+       
 
 
     }

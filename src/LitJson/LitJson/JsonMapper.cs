@@ -756,6 +756,7 @@ namespace LitJson
 
             if (obj is DataTable)
             {
+                writer.ToCamelKey = true;
                 writer.WriteArrayStart();
                 DataTable dt=(DataTable)obj;
                 int rowCount = dt.Rows.Count;
@@ -774,6 +775,8 @@ namespace LitJson
                 writer.WriteArrayEnd();
                 return;
             }
+
+            
 
 
 

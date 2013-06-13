@@ -719,7 +719,7 @@ namespace LitJson
                     "Instance of JsonData is not a dictionary");
 
             type = JsonType.Object;
-            inst_object = new Dictionary<string, JsonData> ();
+            inst_object = new Dictionary<string, JsonData> (StringComparer.OrdinalIgnoreCase);
             object_list = new List<KeyValuePair<string, JsonData>> ();
 
             return (IDictionary) inst_object;
@@ -876,7 +876,7 @@ namespace LitJson
                 break;
 
             case JsonType.Object:
-                inst_object = new Dictionary<string, JsonData> ();
+                inst_object = new Dictionary<string, JsonData> (StringComparer.OrdinalIgnoreCase);
                 object_list = new List<KeyValuePair<string, JsonData>> ();
                 break;
 
