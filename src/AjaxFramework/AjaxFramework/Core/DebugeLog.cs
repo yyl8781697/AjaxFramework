@@ -75,16 +75,14 @@ namespace AjaxFramework
                 File.Create(logPath);
             }
 
-            lock (obj)
-            {
-                using( StreamWriter sw = File.AppendText(logPath))
-                {
-                    sw.Write(GetLogText());
-                    sw.Flush();
-                    sw.Close();
-                    sw.Dispose();
-                }
-            }
+            //lock (obj)
+            //{
+
+                StreamWriter sw = new StreamWriter(logPath, true, Encoding.Default);
+                sw.Write(GetLogText());
+                sw.Close();
+
+            //}
         }
 
         /// <summary>

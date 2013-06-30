@@ -20,5 +20,10 @@ namespace AjaxFramework
             
             return 1;
         }
+
+        public void Dispose()
+        { 
+            
+        }
     }
 }

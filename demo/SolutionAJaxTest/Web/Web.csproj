@@ -75,6 +75,10 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\src\LitJson\LitJson\LitJson.csproj">
+      <Project>{517DF037-79B2-43DE-BB2D-4D46643E4E1B}</Project>
+      <Name>LitJson</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TestBLL\TestBLL.csproj">
       <Project>{FD547E4F-B775-4360-B113-6142208C2D65}</Project>
       <Name>TestBLL</Name>

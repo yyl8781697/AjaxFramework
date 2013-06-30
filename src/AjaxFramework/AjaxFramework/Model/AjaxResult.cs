@@ -45,25 +45,27 @@ namespace AjaxFramework
             if (this.Data != null)
             {
                 //给data赋过值了
-                list.Add("\"data\":\"" + ReplaceJsonChar(this.Data) + "\"");
+                list.Add("\"data\":\"" + ToUnicode(ReplaceJsonChar(this.Data)) + "\"");
             }
             
             if (!string.IsNullOrEmpty(this.ErrorMsg))
             {
                 //有错误了 添加上错误信息
-                list.Add("\"errorMsg\":\"" + ReplaceJsonChar(this.ErrorMsg) + "\"");
+                list.Add("\"errorMsg\":\"" + ToUnicode(ReplaceJsonChar(this.ErrorMsg)) + "\"");
             }
             
             if (this.KeyValueDict != null && this.KeyValueDict.Count > 0)
             {
                 foreach (string key in this.KeyValueDict.Keys)
                 {
-                    list.Add("\"" + key + "\":\"" + this.KeyValueDict[key] + "\"");
+                    list.Add("\"" + key + "\":\"" + ToUnicode(this.KeyValueDict[key]) + "\"");
                 }
             }
             //合并成json字符串并返回
             return "{" + string.Join(",", list.ToArray()) + "}";
         }
+
+        
 
         /// <summary>
         /// 输出文本 即Data或ErrorMsg的其中有值的一个
@@ -84,6 +86,25 @@ namespace AjaxFramework
             Regex r = new Regex("(['\"\r\n])");
             str = r.Replace(str, "");
             return str;
+        }
+
+        /// <summary>
+        /// 转为unicode
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        private string ToUnicode(string str)
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0, count = str.Length; i < count; i++)
+            {
+                if (System.Text.RegularExpressions.Regex.IsMatch(str[i].ToString(), @"[\u4e00-\u9fa5，。！“”；]"))
+                {
+                    sb.Append(@"\u" + ((int)str[i]).ToString("x"));
+
+                }
+            }
+            return sb.ToString();
         }
     }
     #endregion

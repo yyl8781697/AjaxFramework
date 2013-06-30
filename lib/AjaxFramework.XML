@@ -1,0 +1,1290 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AjaxFramework</name>
+    </assembly>
+    <members>
+        <member name="T:AjaxFramework.CustomMethodInfo">
+            <summary>
+            自定义的方法信息 现在用于缓存
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.CustomMethodInfo.Method">
+            <summary>
+            自定义的方法的实例
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.CustomMethodInfo.ParamterInfos">
+            <summary>
+            方法的参数
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.CustomMethodInfo.RetureType">
+            <summary>
+            返回类型
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.CustomMethodInfo.ClassType">
+            <summary>
+            该方法所属类的类型 须用此类型来动态创建类
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.CustomMethodInfo.Assembly">
+            <summary>
+            方法的所属程序集
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.CustomMethodInfo.LastUpdateTime">
+            <summary>
+            最后的更新时间  每获取一次方法都会进行一个更新
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.CustomMethodInfo.Count">
+            <summary>
+            访问次数
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.CustomMethodInfo.AttrList">
+            <summary>
+            该方法的特性列表
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.CustomMethodInfo.CurWebMethodAttr">
+            <summary>
+            得到当前web标志的特性 得不到时返回false
+            </summary>
+        </member>
+        <member name="T:AjaxFramework.CheckDecimal">
+            <summary>
+            检查小数
+            </summary>
+        </member>
+        <member name="T:AjaxFramework.CheckDataStrategy">
+            <summary>
+            检查参数的一个策略
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.CheckDataStrategy.CheckData">
+            <summary>
+            检查参数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:AjaxFramework.CheckDataStrategy.CurrentData">
+            <summary>
+            当前数据的描述
+            </summary>
+        </member>
+        <member name="T:AjaxFramework.CtorDelegate">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AjaxFramework.ReflectionHelper">
+            <summary>
+            反射的帮助类
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.ReflectionHelper.GetAttributes``1(System.Reflection.MethodInfo)">
+            <summary>
+            获取该方法的特性列表 将会转换为指定的泛型列表
+            </summary>
+            <param name="methodInfo">方法的类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.ReflectionHelper.GetAttributes(System.Reflection.MethodInfo)">
+            <summary>
+            获取该方法的特性列表 
+            </summary>
+            <param name="methodInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.ReflectionHelper.GetMethodBaseInfo(AjaxFramework.MethodPathInfo,System.Reflection.BindingFlags)">
+            <summary>
+            得到方法的最基本的信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:AjaxFramework.ReflectionHelper._dictPropertyInfo">
+            <summary>
+            缓存 属性
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.ReflectionHelper.GetPropertyInfos(System.Type,System.Reflection.BindingFlags)">
+            <summary>
+            得到属性 里面有缓存处理
+            </summary>
+            <param name="instanceType"></param>
+            <param name="bindingFlags"></param>
+            <returns></returns>
+        </member>
+        <member name="F:AjaxFramework.ReflectionHelper._dictCtor">
+            <summary>
+            缓存
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.ReflectionHelper.CreateInstace(System.Type)">
+            <summary>
+            创建一个实例   参考http://www.cnblogs.com/fish-li/ 博客的mymvc框架的设计
+            </summary>
+            <param name="instanceType">实例的类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.ReflectionHelper.CreateConstructor(System.Reflection.ConstructorInfo)">
+            <summary>
+            创建构造函数 空参数构造函数
+            </summary>
+            <param name="constructor"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AjaxFramework.CheckAuthorationHandler">
+            <summary>
+            检测权限
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AjaxFramework.OAuthApiAttr">
+            <summary>
+            OAuth认证之后 开放api的特性 
+            PriorityLevel=8000
+            </summary>
+        </member>
+        <member name="T:AjaxFramework.ValidateAttr">
+            <summary>
+            特性的抽象基类
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.ValidateAttr.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.ValidateAttr.IsValidate">
+            <summary>
+            验证方法是否通过
+            </summary>
+            <returns>验证通过返回true，否则，返回false</returns>
+        </member>
+        <member name="M:AjaxFramework.ValidateAttr.CompareTo(System.Object)">
+            <summary>
+            排序
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="P:AjaxFramework.ValidateAttr.CurHttpRequest">
+            <summary>
+            当前的请求的详细信息
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.ValidateAttr.PriorityLevel">
+            <summary>
+            优先等级 数字越大等级越高
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.OAuthApiAttr.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.OAuthApiAttr.IsValidate">
+            <summary>
+            验证access_token是否通过 验证项：是否为空 是否存在 是否在有效期呢
+            验证method name 即方法名 该方法是否包含在scope调用权限中
+            </summary>
+            <returns>验证通过返回true，否则，返回false</returns>
+        </member>
+        <member name="E:AjaxFramework.OAuthApiAttr.CheckAuthoration">
+            <summary>
+            想使用该特性 必须添加上此事件 不然无法进行检测
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.OAuthParams.AccessToken">
+            <summary>
+            令牌
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.OAuthParams.UserName">
+            <summary>
+            用户名  需要反写
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.OAuthParams.MethodName">
+            <summary>
+            调用方法
+            </summary>
+        </member>
+        <member name="T:AjaxFramework.ErrorMsg">
+            <summary>
+            错误信息
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.ErrorMsg.NOT_INT_OR_NULL">
+            <summary>
+            {0}不是有效的{1}的类型或者不能为空
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.ErrorMsg.NOT_REGEX_DEGITAL">
+            <summary>
+            {0}的值{1}不是有效的数字格式
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.ErrorMsg.TOO_SMALL">
+            <summary>
+            {0}的值{1}不能小于{2}
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.ErrorMsg.TOO_BIG">
+            <summary>
+            {0}的值{1}不能大于{2}
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.ErrorMsg.NOT_NULL">
+            <summary>
+            {0}的值不能为空
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.ErrorMsg.NOT_REGEX_STRING">
+            <summary>
+            {0}的值{1}不是有效的字符串格式
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.ErrorMsg.TOO_LONG">
+            <summary>
+            {0}的值允许最大的长度为{1}
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.ErrorMsg.TOO_SHORT">
+            <summary>
+            {0}的值允许最小的长度为{1}
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.ErrorMsg.NOT_DATE_TIME">
+            <summary>
+            {0}的的值{1}不是有效的时间格式
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.ErrorMsg.UNKNOW_ERROR">
+            <summary>
+            {0}的的值不正确
+            </summary>
+        </member>
+        <member name="T:AjaxFramework.CheckInt">
+            <summary>
+            检查整型
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.CheckInt.CheckData">
+            <summary>
+            检查整型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AjaxFramework.WebParameterAttr">
+            <summary>
+            网络参数的特性 能够进行一些通用性的验证
+            PriorityLevel = 100
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.WebParameterAttr.#ctor(System.String,System.Type)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="name">参数的名称</param>
+            <param name="paraType">参数类型 这里只能是简单的类型 比如int,string,float,datetime之类的，用typeof(xx)来传值</param>
+        </member>
+        <member name="M:AjaxFramework.WebParameterAttr.IsValidate">
+            <summary>
+            验证特征的有效性
+            </summary>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException">参数异常</exception>
+        </member>
+        <member name="P:AjaxFramework.WebParameterAttr.Name">
+            <summary>
+            参数名
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.WebParameterAttr.Value">
+            <summary>
+            参数的值
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.WebParameterAttr.ParaType">
+            <summary>
+            参数类型 必填 否则不会进行验证 此处仅对Int(Int16,Int32,Int64),String,DateTime有效
+            这里需要用typeof(int,string)来赋值
+            多精度类型建议用字符串String加正则表达式来进行验证，不过这里也支持float  decmail的类型
+            详情去看CheckDataContext类
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.WebParameterAttr.ErrorMsg">
+            <summary>
+            验证失败时的错误信息
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.WebParameterAttr.Nullable">
+            <summary>
+            是否允许空值 默认为false 表示不允许
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.WebParameterAttr.RegexText">
+            <summary>
+            正则的文本规则 默认空 表示不验证
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.WebParameterAttr.MinValue">
+            <summary>
+            最小值 仅针对Int类型 默认为-1 表示不验证
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.WebParameterAttr.MaxValue">
+            <summary>
+            最大值 仅针对Int类型 默认为-1 表示不验证
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.WebParameterAttr.MaxLength">
+            <summary>
+            最大长度 仅针对String类型 一个汉字算两个字节  默认为-1 表示不验证
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.WebParameterAttr.MinLength">
+            <summary>
+            最小长度 仅针对String类型 一个汉字算两个字节  默认为-1 表示不验证
+            </summary>
+        </member>
+        <member name="T:AjaxFramework.WebMethodAttr">
+            <summary>
+            网络请求的方法特征 无此特性将无法反射访问该方法 
+            PriorityLevel=9999;
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.WebMethodAttr.#ctor">
+            <summary>
+            构造函数 默认post请求，json输出
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.WebMethodAttr.#ctor(AjaxFramework.RequestType)">
+            <summary>
+            构造函数 设置请求类型
+            </summary>
+            <param name="requestType">请求类型</param>
+        </member>
+        <member name="M:AjaxFramework.WebMethodAttr.#ctor(System.String)">
+            <summary>
+            构造函数 设置输出文本类型
+            </summary>
+            <param name="contentType">输出文本类型 可使用ContentType常量</param>
+        </member>
+        <member name="M:AjaxFramework.WebMethodAttr.#ctor(AjaxFramework.RequestType,System.String)">
+            <summary>
+            构造函数 设置请求类型 设置输出文本类型
+            </summary>
+            <param name="requestType">请求类型</param>
+            <param name="contentType">输出文本类型 可使用ContentType常量</param>
+        </member>
+        <member name="M:AjaxFramework.WebMethodAttr.IsValidate">
+            <summary>
+            验证此方法是否能够由当前的访问方式进行访问
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.WebMethodAttr.GetWebParameters(System.Web.HttpContext)">
+            <summary>
+            获取该特性实例下的Http请求的键值对数据
+            </summary>
+            <param name="context">当前的上下文</param>
+            <returns></returns>
+        </member>
+        <member name="P:AjaxFramework.WebMethodAttr.CurRequestType">
+            <summary>
+            请求类型/方式 get post
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.WebMethodAttr.CurContentType">
+            <summary>
+            输出的内容类型
+            <para>常用类型：</para>
+            <para>text/plain</para>
+            <para>application/json(默认)</para>
+            <para>image/*</para>
+            </summary>
+        </member>
+        <member name="T:AjaxFramework.ContentType">
+            <summary>
+            网页返回的头部类型
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.ContentType.JSON">
+            <summary>
+            json格式
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.ContentType.HTML">
+            <summary>
+            直接输出html格式
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.ContentType.XML">
+            <summary>
+            xml格式
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.ContentType.FILE">
+            <summary>
+            文件格式
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.ContentType.IMAGE">
+            <summary>
+            图片类型 你也可以写其他的  比如image/jpreg  image/png
+            </summary>
+        </member>
+        <member name="T:AjaxFramework.IAjax">
+            <summary>
+            这个仅仅用于标识是ajax类（非必须继承）  
+            继承该接口的类将会在编译时加载进程序集的缓存中 加速程序
+            </summary>
+        </member>
+        <member name="T:AjaxFramework.Extension.GetRequestData.GetRequestEnumData">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:AjaxFramework.Extension.GetRequestData.GetRequestDataStrategy">
+            <summary>
+            得到请求数据的一个抽象策略
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.Extension.GetRequestData.GetRequestDataStrategy.bindingFlags">
+            <summary>
+            取方法的一些标志  实例成员 公开 有写功能
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.Extension.GetRequestData.GetRequestDataStrategy.IsMatchType(System.Type)">
+            <summary>
+            是否是匹配上的类型
+            </summary>
+            <param name="paramType">指定的类型</param>
+            <returns>是的话返回true，否则，返回false</returns>
+        </member>
+        <member name="M:AjaxFramework.Extension.GetRequestData.GetRequestDataStrategy.GetValue(System.String,System.Type,AjaxFramework.HttpRequestDescription)">
+            <summary>
+            得到相应类型的值
+            </summary>
+            <param name="paramName">当前参数的名称</param>
+            <param name="paramType">当前参数的类型</param>
+            <param name="currentHttpRequest">当前的请求详情</param>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.Extension.GetRequestData.GetRequestEnumData.IsMatchType(System.Type)">
+            <summary>
+            是否是匹配类型 这里把剩下的类型都认为实体来操作
+            </summary>
+            <param name="paramType">所需判断的类型</param>
+            <returns>是否为枚举类型</returns>
+        </member>
+        <member name="M:AjaxFramework.Extension.GetRequestData.GetRequestEnumData.GetValue(System.String,System.Type,AjaxFramework.HttpRequestDescription)">
+            <summary>
+            取得简单数据类型的值
+            </summary>
+            <param name="paramName">当前参数的名称</param>
+            <param name="paramType">当前参数的类型</param>
+            <param name="currentHttpRequest">当前的请求详情</param>
+            <returns></returns>
+        </member>
+        <member name="T:AjaxFramework.Ajax404Exception">
+            <summary>
+            抛404异常
+            </summary>
+        </member>
+        <member name="T:AjaxFramework.AjaxException">
+            <summary>
+            自定义的Ajax错误
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.AjaxException._errorMsg">
+            <summary>
+            错误信息
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.AjaxException._ajaxResult">
+            <summary>
+            错误类
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.AjaxException.#ctor(System.String)">
+            <summary>
+            错误信息
+            </summary>
+            <param name="errorMsg"></param>
+        </member>
+        <member name="M:AjaxFramework.AjaxException.#ctor(AjaxFramework.AjaxResult)">
+            <summary>
+            直接将ajax结果类传出来
+            </summary>
+            <param name="ajaxResult"></param>
+        </member>
+        <member name="T:AjaxFramework.RequestType">
+            <summary>
+            方法的接收类型 Post Get All
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.RequestType.Post">
+            <summary>
+            Post接收
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.RequestType.Get">
+            <summary>
+            Get方式接收
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.RequestType.All">
+             <summary>
+            都可以 
+             </summary>
+        </member>
+        <member name="T:AjaxFramework.UrlConfig">
+            <summary>
+            URL路径的一个配置
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.UrlConfig.ASSEMBLY">
+            <summary>
+            ajax执行的业务类所在的程序集 默认自己的 有一个测试的
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.UrlConfig.GetMethodPathInfo(System.String)">
+            <summary>
+            得到方法的一些基本的路径信息
+            </summary>
+            <param name="virtualPath"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AjaxFramework.Extension.GetRequestData.GetRequestBatchJosnData">
+            <summary>
+            得到请求的批量Json数据 
+            这里的批量json中  是含有对json记录行标志位的 主要是针对用于miniui的grid删改
+            如果仅仅只是获得无标识位的json批量数据 可以使用GetRequestListnData
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.Extension.GetRequestData.GetRequestBatchJosnData.ADD_METHOD_NAME">
+            <summary>
+            添加方法的名称
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.Extension.GetRequestData.GetRequestBatchJosnData.STATE_KEY">
+            <summary>
+            Json数据中标志位的键值
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.Extension.GetRequestData.GetRequestBatchJosnData._dictAddMethod">
+            <summary>
+            添加方法的缓存
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:AjaxFramework.Extension.GetRequestData.GetRequestBatchJosnData.IsMatchType(System.Type)" -->
+        <member name="M:AjaxFramework.Extension.GetRequestData.GetRequestBatchJosnData.GetValue(System.String,System.Type,AjaxFramework.HttpRequestDescription)">
+            <summary>
+            取得相应的值
+            </summary>
+            <param name="paramName">当前参数的名称</param>
+            <param name="paramType">当前参数的类型</param>
+            <param name="currentHttpRequest">当前的请求详情</param>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.Extension.GetRequestData.GetRequestBatchJosnData.GetAddMethodInfo(System.Type)">
+            <summary>
+            得到BatchJson添加的方法
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AjaxFramework.MethodPathInfo">
+            <summary>
+            方法的一些路径信息
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.MethodPathInfo.Assembly">
+            <summary>
+            程序集
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.MethodPathInfo.ClassName">
+            <summary>
+            类名称
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.MethodPathInfo.MethodName">
+            <summary>
+            方法名称
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.MethodPathInfo.IsValidate">
+            <summary>
+            这个路径信息是否是有效的 表面判断 如果有空值 则无效
+            </summary>
+        </member>
+        <member name="T:AjaxFramework.AjaxResult">
+            <summary>
+            ajax请求的结果
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.AjaxResult.ToString">
+            <summary>
+            重写该方法 将返回该实例的属性的键值对JSON
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.AjaxResult.ToText">
+            <summary>
+            输出文本 即Data或ErrorMsg的其中有值的一个
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.AjaxResult.ReplaceJsonChar(System.String)">
+            <summary>
+            替换json的特殊字符
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.AjaxResult.ToUnicode(System.String)">
+            <summary>
+            转为unicode
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="P:AjaxFramework.AjaxResult.Flag">
+            <summary>
+            ajax请求结果的标志
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.AjaxResult.Data">
+            <summary>
+            ajax请求结果中的数据 一般都是存储操作成功的信息
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.AjaxResult.ErrorMsg">
+            <summary>
+            返回的错误信息
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.AjaxResult.KeyValueDict">
+            <summary>
+            额外的一些键值对的数据 一般情况下是不需要了
+            </summary>
+        </member>
+        <member name="T:AjaxFramework.ResponseDataContext">
+            <summary>
+            输出数据的上下文
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.ResponseDataContext._strategy">
+            <summary>
+            输出数据的策略
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.ResponseDataContext.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="contentType">输出文档类型</param>
+        </member>
+        <member name="M:AjaxFramework.ResponseDataContext.InitStrategy(System.String)">
+            <summary>
+            初始化策略
+            </summary>
+            <param name="contentType">输出文档类型</param>
+        </member>
+        <member name="M:AjaxFramework.ResponseDataContext.GetResponse(System.Object,System.Type)">
+            <summary>
+            得到输出的数据
+            </summary>
+            <param name="obj">要输出的值</param>
+            <param name="type">要输出的类型</param>
+            <returns>返回对应类型的字符串</returns>
+        </member>
+        <member name="M:AjaxFramework.ResponseDataContext.GetResponse(System.String)">
+            <summary>
+            得到输出的数据
+            </summary>
+            <param name="str">要输出的字符串</param>
+        </member>
+        <member name="T:AjaxFramework.Extension.GetRequestData.GetRequestFileData">
+            <summary>
+            得到请求的文件类型 即HttpPostFile
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.Extension.GetRequestData.GetRequestFileData.IsMatchType(System.Type)">
+            <summary>
+            是否是匹配类型 
+            </summary>
+            <param name="paramType">所需判断的类型</param>
+            <returns>如果类型为HttpPostFile格式</returns>
+        </member>
+        <member name="M:AjaxFramework.Extension.GetRequestData.GetRequestFileData.GetValue(System.String,System.Type,AjaxFramework.HttpRequestDescription)">
+            <summary>
+            取得相应的值
+            </summary>
+            <param name="paramName">当前参数的名称</param>
+            <param name="paramType">当前参数的类型</param>
+            <param name="currentHttpRequest">当前的请求详情</param>
+            <returns></returns>
+        </member>
+        <member name="T:AjaxFramework.MethodCache">
+            <summary>
+            方法的一个缓存
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.MethodCache.BINDING_ATTR">
+            <summary>
+            方法的筛选标志 需要Public访问权限 忽略大小写
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.MethodCache.obj">
+            <summary>
+            用于锁
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.MethodCache._idictAssemby">
+            <summary>
+            用于存储程序集
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.MethodCache._idictMethod">
+            <summary>
+            方法的一个字典类 用于缓存维护方法
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.MethodCache.#cctor">
+            <summary>
+            静态构造方法 主要预初始化缓存
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.MethodCache.InitCache">
+            <summary>
+            初始化缓存
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.MethodCache.GetAssemblyName(System.Reflection.Assembly)">
+            <summary>
+            得到程序集的名称  不带版本信息的
+            </summary>
+            <param name="assembly"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.MethodCache.AddMethodCache(System.String,AjaxFramework.CustomMethodInfo)">
+            <summary>
+            添加一个方法的缓存
+            </summary>
+            <param name="key">方法对应的键值</param>
+            <param name="customMethodInfo">缓存中的实体信息</param>
+        </member>
+        <member name="M:AjaxFramework.MethodCache.GetMethodCache(System.String)">
+            <summary>
+            得到方法缓存
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.MethodCache.RemoveMethodCache(System.String)">
+            <summary>
+            移除一个方法缓存
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="P:AjaxFramework.MethodCache.DictMethod">
+            <summary>
+            得到当前的所有缓存
+            </summary>
+        </member>
+        <member name="T:AjaxFramework.OutputCacheAttr">
+            <summary>
+            缓存特性  这里的缓存是缓存在客户端 PriorityLevel=9990
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.OutputCacheAttr.CACHE_KEY">
+            <summary>
+            相应修改标志 头部的键值
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.OutputCacheAttr._cacheSecond">
+            <summary>
+            需要缓存的时间(秒)
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.OutputCacheAttr.#ctor(System.Int32)">
+            <summary>
+            设置缓存时间 秒
+            </summary>
+            <param name="cacheSecond">需要缓存的时间(秒)</param>
+        </member>
+        <member name="M:AjaxFramework.OutputCacheAttr.IsValidate">
+            <summary>
+            检查是否有缓存 如果有缓存标志 直接输出缓存 并且下面的代码将不再运行
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AjaxFramework.Extension.GetRequestData.GetRequestDataContext">
+            <summary>
+            得到请求数据的上下文
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.Extension.GetRequestData.GetRequestDataContext._currentHttpRequest">
+            <summary>
+            当前的请求的详细信息
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.Extension.GetRequestData.GetRequestDataContext._paramName">
+            <summary>
+            参数的名字
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.Extension.GetRequestData.GetRequestDataContext._paramType">
+            <summary>
+            参数的类型
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.Extension.GetRequestData.GetRequestDataContext._strategy">
+            <summary>
+            取值策略变量
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.Extension.GetRequestData.GetRequestDataContext._strategyCache">
+            <summary>
+            策略缓存 在静态方法中初始化
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.Extension.GetRequestData.GetRequestDataContext.#ctor(System.String,System.Type,AjaxFramework.HttpRequestDescription)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="paramName">当前参数的名称</param>
+            <param name="paramType">参数类型</param>
+            <param name="currentHttpRequest">当前的详细请求</param>
+        </member>
+        <member name="M:AjaxFramework.Extension.GetRequestData.GetRequestDataContext.#cctor">
+            <summary>
+            静态构造函数 初始化策略缓存
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.Extension.GetRequestData.GetRequestDataContext.InitStrategy(System.Type)">
+            <summary>
+            根据类型初始化取值策略
+            </summary>
+            <param name="type"></param>
+        </member>
+        <member name="M:AjaxFramework.Extension.GetRequestData.GetRequestDataContext.GetValue">
+            <summary>
+            取值
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AjaxFramework.ResponseString">
+            <summary>
+            直接输出字符串
+            </summary>
+        </member>
+        <member name="T:AjaxFramework.ResponseDataStrategy">
+            <summary>
+            输出数据的一个抽象策略
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.ResponseDataStrategy.GetResponse(System.Object,System.Type)">
+            <summary>
+            得到输出的数据
+            </summary>
+            <param name="obj">要输出的值</param>
+            <param name="type">要输出的类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.ResponseString.GetInstance">
+            <summary>
+            得到当前的实例
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.ResponseString.GetResponse(System.Object,System.Type)">
+            <summary>
+            得到输出的数据
+            </summary>
+            <param name="obj">要输出的值</param>
+            <param name="type">要输出的类型</param>
+            <returns>返回Json字符串</returns>
+        </member>
+        <member name="T:AjaxFramework.MethodHelper">
+            <summary>
+            反射方法的一个帮助类
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.MethodHelper._methodPathInfo">
+            <summary>
+            当前的方法的一些路径信息
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.MethodHelper._context">
+            <summary>
+            当前的上下文
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.MethodHelper._httpRequestDescription">
+            <summary>
+            当前http请求的一个详细描述
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.MethodHelper.#ctor(System.Web.HttpContext,AjaxFramework.MethodPathInfo)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="context">当前上下文</param>
+            <param name="methodPathInfo">方法的相关路径信息</param>
+        </member>
+        <member name="M:AjaxFramework.MethodHelper.InitMethod">
+            <summary>
+            初始化方法 
+            </summary>
+            <exception cref="T:AjaxFramework.Ajax404Exception">没有找到页面</exception>
+        </member>
+        <member name="M:AjaxFramework.MethodHelper.CheckAttribute">
+            <summary>
+            检查方法的特性  
+            现在主要是请求权限的验证 参数的验证
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.MethodHelper.ExecMethod">
+            <summary>
+            执行方法
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:AjaxFramework.MethodHelper.CurCustomMethodInfo">
+            <summary>
+            初始化后的方法信息
+            </summary>
+        </member>
+        <member name="T:AjaxFramework.SampleDataExtension">
+            <summary>
+            常见的数据类型的转换
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.SampleDataExtension._sampleTypeDict">
+            <summary>
+            简单的数据类型字典 key=类型  value=该类型的string=>type的转换方法
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.SampleDataExtension.GetBoolean(System.String)">
+            <summary>
+            根据字符串得到布尔值 true 正数 均表示为布尔值
+            </summary>
+            <param name="val">需要判断的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.SampleDataExtension.IsSampleType(System.Type)">
+            <summary>
+            是否是简单的数据类型 即系统的一些常见的数据类型
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.SampleDataExtension.ConvertSampleTypeValue(System.Type,System.String)">
+            <summary>
+            转换简单的数据类型的值
+            </summary>
+            <param name="type"></param>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="P:AjaxFramework.SampleDataExtension.SampleTypeDict">
+            <summary>
+            简单的数据类型字典 key=类型  value=该类型的string=>type的转换方法
+            </summary>
+        </member>
+        <member name="T:AjaxFramework.SampleDataExtension.ConvertAction">
+            <summary>
+            数据类型转换委托
+            </summary>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AjaxFramework.ResponseXml">
+            <summary>
+            是输出xml类型的
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.ResponseXml.GetInstance">
+            <summary>
+            得到当前的实例
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.ResponseXml.GetResponse(System.Object,System.Type)">
+            <summary>
+            得到输出的数据
+            </summary>
+            <param name="obj">要输出的值</param>
+            <param name="type">要输出的类型</param>
+            <returns>返回Json字符串</returns>
+        </member>
+        <member name="T:AjaxFramework.HttpRequestDescription">
+            <summary>
+            Http请求的一个详细的描述
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.HttpRequestDescription.Context">
+            <summary>
+            请求的上下文
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.HttpRequestDescription.WebParameters">
+            <summary>
+            请求的参数 最后以此为此次请求的参数值 原始值为Context里面的请求值 但是可能在后期会修改该参数键值对
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.HttpRequestDescription.CurrentMethodInfo">
+            <summary>
+            当前请求的方法的详细信息
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:AjaxFramework.Extension.GetRequestData.GetResquestListData" -->
+        <!-- Badly formed XML comment ignored for member "M:AjaxFramework.Extension.GetRequestData.GetResquestListData.IsMatchType(System.Type)" -->
+        <member name="M:AjaxFramework.Extension.GetRequestData.GetResquestListData.GetValue(System.String,System.Type,AjaxFramework.HttpRequestDescription)">
+            <summary>
+            取得相应的值
+            </summary>
+            <param name="paramName">当前参数的名称</param>
+            <param name="paramType">当前参数的类型</param>
+            <param name="currentHttpRequest">当前的请求详情</param>
+            <returns></returns>
+        </member>
+        <member name="T:AjaxFramework.CheckDate">
+            <summary>
+            检查时间
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.CheckDate.CheckData">
+            <summary>
+            检查时间
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AjaxFramework.CheckDataContext">
+            <summary>
+            检查数据的上下文
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.CheckDataContext._strategy">
+            <summary>
+            检查数据的策略
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.CheckDataContext.STRATEGY_DICT">
+            <summary>
+            策略的字典
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.CheckDataContext.#ctor(AjaxFramework.WebParameterAttr)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:AjaxFramework.CheckDataContext.CheckData">
+            <summary>
+            检查数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AjaxFramework.Extension.GetRequestData.GetRequestEntityData">
+            <summary>
+            得到请求中的实体数据 最好别存在实体嵌套的情况
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.Extension.GetRequestData.GetRequestEntityData.IsMatchType(System.Type)">
+            <summary>
+            是否是匹配类型 这里把剩下的类型都认为实体来操作
+            </summary>
+            <param name="paramType">所需要判断的类型</param>
+            <returns>true</returns>
+        </member>
+        <member name="M:AjaxFramework.Extension.GetRequestData.GetRequestEntityData.GetValue(System.String,System.Type,AjaxFramework.HttpRequestDescription)">
+            <summary>
+            得到实体类的值
+            </summary>
+            <param name="paramName">当前参数的名称</param>
+            <param name="paramType">当前参数的类型</param>
+            <param name="currentHttpRequest">当前的请求详情</param>
+            <returns></returns>
+        </member>
+        <member name="T:AjaxFramework.BatchJson`1">
+            <summary>
+            批量的json字符串
+            </summary>
+            <typeparam name="T">泛型的类型</typeparam>
+        </member>
+        <member name="M:AjaxFramework.BatchJson`1.Add(System.String,`0)">
+            <summary>
+            键值的一个添加操作
+            </summary>
+            <param name="key"></param>
+            <param name="t"></param>
+        </member>
+        <member name="P:AjaxFramework.BatchJson`1.Data">
+            <summary>
+            Json批量序列化后的数据 
+            </summary>
+        </member>
+        <member name="T:AjaxFramework.DebugeLog">
+            <summary>
+            调试日志   仅在开发环境中开启即可
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.DebugeLog.logPath">
+            <summary>
+            日志路径 在config中配置 如果没配置将不会写日志
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.DebugeLog._logQueue">
+            <summary>
+            日志队列
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.DebugeLog.obj">
+            <summary>
+            日志锁
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.DebugeLog.Write(System.String)">
+            <summary>
+            写日志 是一个入队操作
+            </summary>
+            <param name="str"></param>
+        </member>
+        <member name="M:AjaxFramework.DebugeLog.Write(System.Exception)">
+            <summary>
+            写异常日志 会包含他的内部日志
+            </summary>
+            <param name="ex"></param>
+        </member>
+        <member name="M:AjaxFramework.DebugeLog.Submit">
+            <summary>
+            提交日志
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.DebugeLog.GetLogText">
+            <summary>
+            得到日志文本 一个出队操作
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AjaxFramework.ResponseJson">
+            <summary>
+            直接输出Json类型的
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.ResponseJson.GetInstance">
+            <summary>
+            得到当前的实例
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.ResponseJson.GetResponse(System.Object,System.Type)">
+            <summary>
+            得到输出的数据
+            </summary>
+            <param name="obj">要输出的值</param>
+            <param name="type">要输出的类型</param>
+            <returns>返回Json字符串</returns>
+        </member>
+        <member name="T:AjaxFramework.Extension.GetRequestData.GetRequestSampleTypeData">
+            <summary>
+            得到简单数据类型的值  简单数据类型参照SampleDataExtension
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.Extension.GetRequestData.GetRequestSampleTypeData.IsMatchType(System.Type)">
+            <summary>
+            是否是匹配类型 这里把剩下的类型都认为实体来操作
+            </summary>
+            <param name="paramType">所需判断的类型</param>
+            <returns>是否为简单类型</returns>
+        </member>
+        <member name="M:AjaxFramework.Extension.GetRequestData.GetRequestSampleTypeData.GetValue(System.String,System.Type,AjaxFramework.HttpRequestDescription)">
+            <summary>
+            取得简单数据类型的值
+            </summary>
+            <param name="paramName">当前参数的名称</param>
+            <param name="paramType">当前参数的类型</param>
+            <param name="currentHttpRequest">当前的请求详情</param>
+            <returns></returns>
+        </member>
+        <member name="T:AjaxFramework.CheckString">
+            <summary>
+            检查字符串
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.CheckString.CheckData">
+            <summary>
+            检查字符串
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.CheckString.GetLength(System.String)">
+            <summary> 
+            获取字符串长度，一个汉字算两个字节 
+            </summary> 
+            <param name="str"></param> 
+            <returns></returns> 
+        </member>
+        <member name="T:AjaxFramework.ParameterHelper">
+            <summary>
+            参数的帮助类
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.ParameterHelper._currentHttpRequest">
+            <summary>
+            当前的请求的详细信息
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.ParameterHelper.#ctor(AjaxFramework.HttpRequestDescription)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="currentHttpRequest">当前Http请求</param>
+        </member>
+        <member name="M:AjaxFramework.ParameterHelper.GetParameterValues(System.Reflection.ParameterInfo[])">
+            <summary>
+            得到参数的值
+            </summary>
+            <param name="parameterInfos">方法参数的详细信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.ParameterHelper.GetValue(System.Reflection.ParameterInfo)">
+            <summary>
+            得到参数的值
+            </summary>
+            <param name="parameterInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.ResponseHandler.#ctor(System.String)">
+             <summary>
+             构造方法  主要是初始化请求方法的一些路径信息 比如 空间 类  方法名
+             </summary>
+            <param name="virtualPath">请求的一个虚拟路径</param>
+        </member>
+        <member name="M:AjaxFramework.ResponseHandler.ProcessRequest(System.Web.HttpContext)">
+            <summary>
+            Handler的入口
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="P:AjaxFramework.ResponseHandler.CurrentMethodPathInfo">
+            <summary>
+            需要执行方法的一些路径信息
+            </summary>
+        </member>
+    </members>
+</doc>

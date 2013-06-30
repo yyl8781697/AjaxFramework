@@ -17,10 +17,16 @@ namespace AjaxFramework.Extension.GetRequestData
         /// </summary>
         private HttpRequestDescription _currentHttpRequest;
 
+
         /// <summary>
-        /// 属性详情
+        /// 参数的名字
         /// </summary>
-        private ParameterInfo _parameterInfo;
+        private string _paramName;
+
+        /// <summary>
+        /// 参数的类型
+        /// </summary>
+        private Type _paramType;
 
         /// <summary>
         /// 取值策略变量
@@ -37,23 +43,25 @@ namespace AjaxFramework.Extension.GetRequestData
         /// <summary>
         /// 构造函数
         /// </summary>
+        /// <param name="paramName">当前参数的名称</param>
+        /// <param name="paramType">参数类型</param>
         /// <param name="currentHttpRequest">当前的详细请求</param>
-        /// <param name="parameterInfo">当前的详细参数</param>
-        public GetRequestDataContext(HttpRequestDescription currentHttpRequest, ParameterInfo parameterInfo)
+        public GetRequestDataContext( string paramName, Type paramType,HttpRequestDescription currentHttpRequest)
         {
             if (currentHttpRequest == null)
             { 
-                throw new ArgumentNullException("currentHttpRequest");
+                throw new ArgumentNullException("当前的请求信息不能为空");
             }
 
-            if (parameterInfo == null)
+            if (paramType == null)
             {
-                throw new ArgumentNullException("parameterInfo");
+                throw new ArgumentNullException("参数类型不能为空!");
             }
 
+            this._paramName = paramName;
+            this._paramType = paramType;
             this._currentHttpRequest = currentHttpRequest;
-            this._parameterInfo = parameterInfo;
-            InitStrategy(_parameterInfo.ParameterType);
+            InitStrategy(paramType);
         }
         #endregion
 
@@ -64,11 +72,12 @@ namespace AjaxFramework.Extension.GetRequestData
         static GetRequestDataContext()
         {
             _strategyCache = new List<GetRequestDataStrategy>(){
-               new GetRequestSampleTypeData(),
-               new GetRequestBatchJosnData(),
+               new GetRequestSampleTypeData(),//最简单的数据类型
+               new GetRequestEnumData(),//枚举类型
+               new GetRequestBatchJosnData(),//批量的Json类型
                //new GetResquestListData(),//暂时还不支持啊
-               new GetRequestFileData(),
-               new GetRequestEntityData()
+               new GetRequestFileData(),//文件类型
+               new GetRequestEntityData()//实体类型
             };
         }
         #endregion
@@ -105,7 +114,7 @@ namespace AjaxFramework.Extension.GetRequestData
         /// <returns></returns>
         public object GetValue()
         {
-            return this._strategy.GetValue(this._parameterInfo.Name, this._parameterInfo.ParameterType, this._currentHttpRequest);
+            return this._strategy.GetValue(this._paramName, this._paramType, this._currentHttpRequest);
         }
         #endregion
     }

@@ -15,7 +15,7 @@ namespace AjaxFramework
 
         private IDictionary<string, IList<T>> _data = new Dictionary<string, IList<T>>();
         /// <summary>
-        /// Json批量序列化后的数据
+        /// Json批量序列化后的数据 
         /// </summary>
         public IDictionary<string, IList<T>> Data {
             get {

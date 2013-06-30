@@ -99,6 +99,7 @@ namespace AjaxFramework
         #endregion
 
 
+
         #region 是否是简单的数据类型 即系统的一些常见的数据类型
         /// <summary>
         /// 是否是简单的数据类型 即系统的一些常见的数据类型

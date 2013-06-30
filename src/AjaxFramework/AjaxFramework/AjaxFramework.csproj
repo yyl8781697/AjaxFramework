@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\AjaxFramework.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -71,6 +72,7 @@
     <Compile Include="Extension\GetRequestData\GetRequestDataContext.cs" />
     <Compile Include="Extension\GetRequestData\GetRequestDataStrategy.cs" />
     <Compile Include="Extension\GetRequestData\GetRequestEntityData.cs" />
+    <Compile Include="Extension\GetRequestData\GetRequestEnumData.cs" />
     <Compile Include="Extension\GetRequestData\GetRequestFileData.cs" />
     <Compile Include="Extension\GetRequestData\GetRequestSampleTypeData.cs" />
     <Compile Include="Extension\GetRequestData\GetResquestListData.cs" />
@@ -96,7 +98,8 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy $(TargetDir)\$(TargetFileName) $(ProjectDir)\..\..\..\lib  /y</PostBuildEvent>
+    <PostBuildEvent>copy $(TargetDir)\$(TargetFileName) $(ProjectDir)\..\..\..\lib  /y
+copy $(TargetDir)\$(TargetName).xml $(ProjectDir)\..\..\..\lib  /y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

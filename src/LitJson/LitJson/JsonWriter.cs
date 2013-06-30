@@ -41,7 +41,7 @@ namespace LitJson
     {
         #region Fields
         private static NumberFormatInfo number_format;
-
+        private static IDictionary<string, string> _idictCamel;
         private WriterContext        context;
         private Stack<WriterContext> ctx_stack;
         private bool                 has_reached_end;
@@ -108,6 +108,7 @@ namespace LitJson
         static JsonWriter ()
         {
             number_format = NumberFormatInfo.InvariantInfo;
+            _idictCamel = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         }
 
         public JsonWriter ()
@@ -480,7 +481,7 @@ namespace LitJson
             if (this.ToCamelKey)
             {
                 //Convert to lower
-                property_name = ToCamel(property_name,"_");
+                property_name = GetCamel(property_name, "_");
             }
 
             PutString (property_name);
@@ -500,13 +501,34 @@ namespace LitJson
             context.ExpectingValue = true;
         }
 
+        
+        /// <summary>
+        /// get string to camel type
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="separator"></param>
+        private string GetCamel(string str, string separator)
+        {
+            string camel=string.Empty;
+
+            if (_idictCamel.ContainsKey(str))
+            {
+                camel = _idictCamel[str];
+            }
+            else {
+                camel = ToCamel(str, separator);
+                _idictCamel.Add(str, camel);
+            }
+            return camel;
+        }
+        
         /// <summary>
         /// convert string  to camel type
         /// </summary>
         /// <param name="str"></param>
         /// <param name="separator"></param>
         /// <returns></returns>
-        public string ToCamel(string str, string separator)
+        private string ToCamel(string str, string separator)
         {
             Regex regex = new Regex(string.Format(@"({0}?[A-Za-z0-9]+)", separator));
             str = regex.Replace(str, (m) =>

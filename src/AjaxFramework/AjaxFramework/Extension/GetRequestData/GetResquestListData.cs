@@ -20,7 +20,7 @@ namespace AjaxFramework.Extension.GetRequestData
         /// <returns>如果类型为List<T>格式，则为Json数组格式</returns>
         public override bool IsMatchType(Type paramType)
         {
-            return typeof(List<>).Name.Equals(paramType.Name);
+            return typeof(IList<>).Name.Equals(paramType.Name) || typeof(List<>).Name.Equals(paramType.Name);
         }
         #endregion
 

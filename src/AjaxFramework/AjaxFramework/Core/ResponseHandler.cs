@@ -51,10 +51,8 @@ namespace AjaxFramework
                 
                 if (methodHelper.CheckAttribute())
                 {
-                    log.Write("方法特性通过检查");
                     //用帮助类执行该方法
                     object ret = methodHelper.ExecMethod();
-                    log.Write("动态方法执行成功");
                     //得到需要输出的字符串
                     output = this.reponseContext.GetResponse(ret, methodHelper.CurCustomMethodInfo.RetureType);
                 }

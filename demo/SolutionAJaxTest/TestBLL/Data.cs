@@ -59,8 +59,8 @@ namespace TestBLL
         [OutputCacheAttr(20)]
         public string Get_Pat(HttpPostedFile file)
         {
-            
-            return "pat STATIC"+DateTime.Now;
+            return null;
+            //return "pat STATIC"+DateTime.Now;
         }
 
         /// <summary>
@@ -68,11 +68,10 @@ namespace TestBLL
         /// </summary>
         /// <returns></returns>
         [WebMethodAttr(RequestType.All)]
-        [OutputCacheAttr(20)]
-        public int Get_Pat2()
+        public bool Get_Pat2()
         {
-            id++;
-            return id;
+            throw new Exception("已经从夫");
+            return true;
         }
 
         /// <summary>
@@ -109,6 +108,11 @@ namespace TestBLL
         public User Insert_User(User user)
         {
             return user;
+        }
+
+        public void Dispose()
+        {
+
         }
         
     }

@@ -65,6 +65,8 @@ namespace LitJson
 
         private IDictionary<string, PropertyMetadata> properties;
 
+        
+
 
         public Type ElementType {
             get {
@@ -206,9 +208,10 @@ namespace LitJson
             if (type.GetInterface ("System.Collections.IDictionary") != null)
                 data.IsDictionary = true;
 
-            data.Properties = new Dictionary<string, PropertyMetadata> ();
+            data.Properties = new Dictionary<string, PropertyMetadata> (StringComparer.OrdinalIgnoreCase);
 
-            foreach (PropertyInfo p_info in type.GetProperties ()) {
+            foreach (PropertyInfo p_info in type.GetProperties(BindingFlags.Instance| BindingFlags.Public | BindingFlags.IgnoreCase))
+            {
                 if (p_info.Name == "Item") {
                     ParameterInfo[] parameters = p_info.GetIndexParameters ();
 
@@ -228,7 +231,8 @@ namespace LitJson
                 data.Properties.Add (p_info.Name, p_data);
             }
 
-            foreach (FieldInfo f_info in type.GetFields ()) {
+            foreach (FieldInfo f_info in type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.IgnoreCase))
+            {
                 PropertyMetadata p_data = new PropertyMetadata ();
                 p_data.Info = f_info;
                 p_data.IsField = true;

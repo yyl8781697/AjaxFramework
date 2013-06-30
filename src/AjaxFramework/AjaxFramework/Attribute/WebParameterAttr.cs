@@ -109,6 +109,22 @@ namespace AjaxFramework
             }
         }
 
+        private int _minLength = -1;
+        /// <summary>
+        /// 最小长度 仅针对String类型 一个汉字算两个字节  默认为-1 表示不验证
+        /// </summary>
+        public int MinLength
+        {
+            get
+            {
+                return this._minLength;
+            }
+            set
+            {
+                this._minLength = value;
+            }
+        }
+
 
         #endregion
 

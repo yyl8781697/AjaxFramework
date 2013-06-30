@@ -66,9 +66,8 @@ namespace AjaxFramework
         /// <returns></returns>
         private object GetValue(ParameterInfo parameterInfo)
         {
-            GetRequestDataContext context = new GetRequestDataContext(this._currentHttpRequest, parameterInfo);
+            GetRequestDataContext context = new GetRequestDataContext(parameterInfo.Name, parameterInfo.ParameterType,this._currentHttpRequest);
             return context.GetValue();
-
         }
 
         

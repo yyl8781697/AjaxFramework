@@ -21,8 +21,14 @@ namespace AjaxFramework
         {
             if (type == null)
             {
-                throw new ArgumentNullException("returnType");
+                throw new AjaxException("未指定明确的返回值类型!");
             }
+
+            if (obj == null && type!=typeof(void))
+            {
+                throw new AjaxException("返回值不能为NULL!");
+            }
+
             return "";
         }
     }

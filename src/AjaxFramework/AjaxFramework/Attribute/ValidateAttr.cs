@@ -6,12 +6,15 @@ using System.Web;
 
 namespace AjaxFramework
 {
+    /// <summary>
+    /// 特性的抽象基类
+    /// </summary>
     public abstract class ValidateAttr:Attribute,IComparable
     {
         /// <summary>
         /// 当前的请求的详细信息
         /// </summary>
-        internal HttpRequestDescription CurHttpRequest { get; set; }
+        public HttpRequestDescription CurHttpRequest { get; set; }
 
         /// <summary>
         /// 优先等级 数字越大等级越高

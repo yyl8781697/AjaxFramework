@@ -159,15 +159,18 @@ namespace AjaxFramework
         /// <returns></returns>
         public object ExecMethod()
         {
-            object ret = null;
+            object ret = null;//返回值
+            object newInstance = null;//新实例
             try
             {
                 ParameterHelper parameterHelper = new ParameterHelper(this._httpRequestDescription);
                 //得到了方法中参数的值
                 object[] args = parameterHelper.GetParameterValues(this.CurCustomMethodInfo.ParamterInfos);
 
+                newInstance = this.CurCustomMethodInfo.ClassType.CreateInstace();
                 //动态执行方法 这里会 新创建一个实例
-                ret = this.CurCustomMethodInfo.Method.Invoke(this.CurCustomMethodInfo.ClassType.CreateInstace(), args);
+                ret = this.CurCustomMethodInfo.Method.Invoke(newInstance, args);
+                
             }
             catch (Exception ex)
             {
@@ -178,7 +181,13 @@ namespace AjaxFramework
                 }
                 //否则直接抛异常错误
                 throw ex;
-
+            }
+            finally {
+                if (newInstance is IAjax)
+                {
+                    //将当前新实例给释放掉
+                    (newInstance as IAjax).Dispose();
+                }
             }
             return ret;
         }

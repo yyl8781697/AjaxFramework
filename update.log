@@ -1,17 +1,25 @@
 AjaxFramework-v1.0  --2013-4-xx
-1:已完成了基本bs调用cs端的功能
+1:已完成了基本bs调用cs业务类的功能
 
 AjaxFramework-v1.1  --2013-5-31
 1:修复了在调用过程中一直使用单例的问题
 2:添加了多类型的输出  比如xml,image,html
-3:将json的序列化组件从newtomsoft.json转到了litjson
+3:将json的序列化组件从newtomsoft.json转到了litjson 并且将listJson做
+4：修改litJson源码，增加对DataTable序列化的支持  并且在此类型序列化时  带下划线的命名将会被统一转为驼峰法  Example:SYS_USER=>sysUser
 
 AjaxFramework-v1.2  --2013-6-5
 1:加了参数中json数组传值的支持
 2:将传值接收修改为策略模式，方便以后添加其他类型
 3:添加了开发中调试日志的支持 
 
-AjaxFramework-v1.3  --2013-6-6
+AjaxFramework-v1.3  --2013-6-13
 1:修复了在报错情况下抛出的错误键值不一致(errorMsg,error_msg)，现统一改为了errorMsg
+
+AjaxFramework-v1.4  --2013-6-20
+1:在标志接口IAjax接口继承了IDispose，并且框架内在执行完方法后会对此进行Dispose调用
+2:在接收到类型中 增加了对枚举值的支持
+3:修改方法返回值若为NULL，页面将显示  "返回值不能为空"的错误信息
+4：在返回异常时也同时转为unicode输出
+
 
 

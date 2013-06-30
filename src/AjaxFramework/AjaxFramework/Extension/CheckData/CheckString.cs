@@ -47,6 +47,17 @@ namespace AjaxFramework
                     }
                 }
                 #endregion
+
+                #region 验证最小的长度  若在允许空情况下  值不为空是才去验证
+                if (base.CurrentData.MinLength != -1)
+                {
+                    if ((!base.CurrentData.Nullable || !string.IsNullOrEmpty(base.CurrentData.Value )) &&GetLength(base.CurrentData.Value) < base.CurrentData.MinLength)
+                    {
+                        throw new ArgumentException(string.Format(ErrorMsg.TOO_SHORT, base.CurrentData.Name, base.CurrentData.MinLength));
+                    }
+                }
+                #endregion
+
             }
             catch (ArgumentException argEx)
             {

@@ -7,7 +7,7 @@ using System.Reflection;
 namespace AjaxFramework.Extension.GetRequestData
 {
     /// <summary>
-    /// 得到请求中的实体数据 不知道嵌套实体
+    /// 得到请求中的实体数据 最好别存在实体嵌套的情况
     /// </summary>
     internal class GetRequestEntityData:GetRequestDataStrategy
     {
@@ -43,13 +43,12 @@ namespace AjaxFramework.Extension.GetRequestData
             object t = paramType.CreateInstace();
             for (int i = 0; i < propertys.Length; i++)
             {
-                //从键值对里面得到值
-                string val = currentHttpRequest.WebParameters[propertys[i].Name];
-
-                if (propertys[i].PropertyType.IsSampleType() && propertys[i].CanWrite)
+                if (propertys[i].CanWrite)
                 {
-                    //如果是简单的类型 并且为可写  就将值进行转换
-                    object obj = propertys[i].PropertyType.ConvertSampleTypeValue(val);
+                    //如果为可写时   尝试再次使用策略进行转化
+                    GetRequestDataContext context = new GetRequestDataContext(propertys[i].Name, propertys[i].PropertyType, currentHttpRequest);
+                    
+                    object obj = context.GetValue();
                     propertys[i].SetValue(t, obj, null);
                 }
                 //不是  还不是简单地类型 就不再进行操作 直接舍弃

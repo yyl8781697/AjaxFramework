@@ -46,6 +46,11 @@ namespace AjaxFramework
         public const string TOO_LONG = "{0}的值允许最大的长度为{1}";
 
         /// <summary>
+        /// {0}的值允许最小的长度为{1}
+        /// </summary>
+        public const string TOO_SHORT = "{0}的值允许最小的长度为{1}";
+
+        /// <summary>
         /// {0}的的值{1}不是有效的时间格式
         /// </summary>
         public const string NOT_DATE_TIME = "{0}的的值{1}不是有效的时间格式";

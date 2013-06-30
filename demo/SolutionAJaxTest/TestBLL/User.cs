@@ -25,9 +25,18 @@ namespace TestBLL
         /// </summary>
         public System.Decimal Age { get; set; }
 
+        public PeopleSex Sex { get; set; } 
+
         /// <summary>
         /// 生日
         /// </summary>
         public DateTime Birthday { get; set; }
+    }
+
+    public enum PeopleSex
+    { 
+        UnKnow=0,
+        Female=1,
+        Male=2
     }
 }
