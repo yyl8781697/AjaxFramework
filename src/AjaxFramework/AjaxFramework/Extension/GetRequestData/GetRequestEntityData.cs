@@ -21,6 +21,11 @@ namespace AjaxFramework.Extension.GetRequestData
         public override bool IsMatchType(Type paramType)
         {
             base.IsMatchType(paramType);
+            if (paramType.FullName.StartsWith("System"))
+            {
+                //以System开头的  认为不是自己的实体
+                return false;
+            }
             return true;
         }
         #endregion

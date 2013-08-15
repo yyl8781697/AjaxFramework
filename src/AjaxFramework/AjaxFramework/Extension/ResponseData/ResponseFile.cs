@@ -2,16 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using LitJson;
 
 namespace AjaxFramework
 {
-    /// <summary>
-    /// 直接输出Json类型的
-    /// </summary>
-    internal class ResponseJson : ResponseDataStrategy
+    internal class ResponseFile : ResponseDataStrategy
     {
-        private static ResponseJson _instance = null;
+        private static ResponseFile _instance = null;
         /// <summary>
         /// 得到当前的实例
         /// </summary>
@@ -20,7 +16,7 @@ namespace AjaxFramework
         {
             if (_instance == null)
             {
-                _instance = new ResponseJson();
+                _instance = new ResponseFile();
             }
             return _instance;
         }
@@ -38,35 +34,16 @@ namespace AjaxFramework
             string ret = string.Empty;
             try
             {
-                if (type==typeof(object))
+                if (typeof(byte[]) == type)
                 {
-                    //如果类型是object  尝试取他实际的类型
-                    type = obj.GetType();
-                }
+                    //设置取消缓存
+                    base.CurrentContext.Response.Buffer = true;
+                    base.CurrentContext.Response.ExpiresAbsolute = System.DateTime.Now.AddMilliseconds(0);
+                    base.CurrentContext.Response.Expires = 0;
+                    base.CurrentContext.Response.CacheControl = "no-cache";
+                    base.CurrentContext.Response.AppendHeader("Pragma", "No-Cache");
 
-
-                
-                if (type.IsSampleType())
-                {
-                    //返回的是简单类型
-                    AjaxResult ajaxResult = new AjaxResult()
-                    {
-                        Flag = "1",
-                        Data = Convert.ToString(obj)
-                    };
-                    ret = ajaxResult.ToString();
-                }
-                else if (obj is AjaxResult)
-                {
-                    ret = (obj as AjaxResult).ToString();
-                }
-                else if (obj is JsonpResult)
-                {
-                    ret = (obj as JsonpResult).ToString();
-                }
-                else
-                {
-                    ret = JsonMapper.ToJson(obj);
+                    base.CurrentContext.Response.BinaryWrite(obj as byte[]);
                 }
             }
             catch (Exception ex)

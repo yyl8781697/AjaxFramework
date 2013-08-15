@@ -74,9 +74,11 @@ namespace AjaxFramework.Extension.GetRequestData
             _strategyCache = new List<GetRequestDataStrategy>(){
                new GetRequestSampleTypeData(),//最简单的数据类型
                new GetRequestEnumData(),//枚举类型
+               new GetResquestListData(),//尽量少用 建议用其他方法来实现
                new GetRequestBatchJosnData(),//批量的Json类型
-               //new GetResquestListData(),//暂时还不支持啊
                new GetRequestFileData(),//文件类型
+               new GetRequestHttpContext(),//获取当前请求上下文
+               new GetRequestDescription(),//获取请求的详情
                new GetRequestEntityData()//实体类型
             };
         }
@@ -99,10 +101,10 @@ namespace AjaxFramework.Extension.GetRequestData
                 }
             }
 
-            if (_strategy == null)
+             if (_strategy == null)
             {
-                //如果没有得到策略 则给实体类去处理
-                _strategy = new GetRequestEntityData();
+                //如果没有得到策略 则报错
+                throw new Exception("处理请求参数的策略没有找到!");
             }
         }
         #endregion

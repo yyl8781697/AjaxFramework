@@ -54,6 +54,53 @@
             得到当前web标志的特性 得不到时返回false
             </summary>
         </member>
+        <member name="T:AjaxFramework.Extension.GetRequestData.GetRequestHttpContext">
+            <summary>
+            获取请求数据的当前上下文 用于需要知道一些请求相关的数据或者当前类型无法满足时使用
+            </summary>
+        </member>
+        <member name="T:AjaxFramework.Extension.GetRequestData.GetRequestDataStrategy">
+            <summary>
+            得到请求数据的一个抽象策略
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.Extension.GetRequestData.GetRequestDataStrategy.bindingFlags">
+            <summary>
+            取方法的一些标志  实例成员 公开 有写功能
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.Extension.GetRequestData.GetRequestDataStrategy.IsMatchType(System.Type)">
+            <summary>
+            是否是匹配上的类型
+            </summary>
+            <param name="paramType">指定的类型</param>
+            <returns>是的话返回true，否则，返回false</returns>
+        </member>
+        <member name="M:AjaxFramework.Extension.GetRequestData.GetRequestDataStrategy.GetValue(System.String,System.Type,AjaxFramework.HttpRequestDescription)">
+            <summary>
+            得到相应类型的值
+            </summary>
+            <param name="paramName">当前参数的名称</param>
+            <param name="paramType">当前参数的类型</param>
+            <param name="currentHttpRequest">当前的请求详情</param>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.Extension.GetRequestData.GetRequestHttpContext.IsMatchType(System.Type)">
+            <summary>
+            是否是匹配类型 需要为HttpContext类型
+            </summary>
+            <param name="paramType">所需要判断的类型</param>
+            <returns>true</returns>
+        </member>
+        <member name="M:AjaxFramework.Extension.GetRequestData.GetRequestHttpContext.GetValue(System.String,System.Type,AjaxFramework.HttpRequestDescription)">
+            <summary>
+            得到实体类的值
+            </summary>
+            <param name="paramName">当前参数的名称</param>
+            <param name="paramType">当前参数的类型</param>
+            <param name="currentHttpRequest">当前的请求详情</param>
+            <returns></returns>
+        </member>
         <member name="T:AjaxFramework.CheckDecimal">
             <summary>
             检查小数
@@ -214,6 +261,107 @@
             <summary>
             调用方法
             </summary>
+        </member>
+        <member name="T:AjaxFramework.Extension.XmlSerializer.XmlSerializerContext">
+            <summary>
+            Xml序列化 的上下文
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.Extension.XmlSerializer.XmlSerializerContext.XML_HEADER">
+            <summary>
+            申明XML的头部
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.Extension.XmlSerializer.XmlSerializerContext._strategy">
+            <summary>
+            实际策略类
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.Extension.XmlSerializer.XmlSerializerContext._strategyCache">
+            <summary>
+            所有策略缓存类
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.Extension.XmlSerializer.XmlSerializerContext._tw">
+            <summary>
+            IO输入
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.Extension.XmlSerializer.XmlSerializerContext._type">
+            <summary>
+            要序列化的类型
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.Extension.XmlSerializer.XmlSerializerContext.#ctor(System.IO.TextWriter,System.Type)">
+            <summary>
+            构造函数 构建策略的上下文
+            </summary>
+            <param name="tw"></param>
+            <param name="type"></param>
+        </member>
+        <member name="M:AjaxFramework.Extension.XmlSerializer.XmlSerializerContext.#cctor">
+            <summary>
+            初始化策略缓存
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.Extension.XmlSerializer.XmlSerializerContext.InitStrategy(System.Type)">
+            <summary>
+            初始化策略
+            </summary>
+            <param name="type"></param>
+        </member>
+        <member name="M:AjaxFramework.Extension.XmlSerializer.XmlSerializerContext.Serialize(System.String,System.Object)">
+            <summary>
+            对目标对象进行序列化
+            </summary>
+            <param name="nodeName">节点的名称</param>
+            <param name="nodeValue">节点的内容</param>
+        </member>
+        <member name="M:AjaxFramework.Extension.XmlSerializer.XmlSerializerContext.Serialize(System.Object)">
+            <summary>
+            指定目标的值
+            这个方法会添加上xml的头部
+            </summary>
+            <param name="targetValue"></param>
+        </member>
+        <member name="T:AjaxFramework.Extension.XmlSerializer.HashTableXmlSeralizer">
+            <summary>
+            HashTable的 XML序列化
+            </summary>
+        </member>
+        <member name="T:AjaxFramework.Extension.XmlSerializer.XmlSerializerStrategy">
+            <summary>
+            Xml序列化策略的抽象类
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.Extension.XmlSerializer.XmlSerializerStrategy.IsMatchType(System.Type)">
+            <summary>
+            是否符合类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.Extension.XmlSerializer.XmlSerializerStrategy.Serialize(System.IO.TextWriter,System.String,System.Object)">
+            <summary>
+            进行序列化操作
+            </summary>
+            <param name="tw"></param>
+            <param name="nodeName">序列化出来节点的名称  如果值为空的话  使用类型作为节点的名称</param>
+            <param name="nodeValue">需要序列化节点的值</param>
+        </member>
+        <member name="M:AjaxFramework.Extension.XmlSerializer.HashTableXmlSeralizer.IsMatchType(System.Type)">
+            <summary>
+            判断是否属于HashTable类
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.Extension.XmlSerializer.HashTableXmlSeralizer.Serialize(System.IO.TextWriter,System.String,System.Object)">
+            <summary>
+            进行序列化操作
+            </summary>
+            <param name="tw"></param>
+            <param name="nodeName">序列化出来节点的名称  如果值为空的话  使用类型作为节点的名称</param>
+            <param name="nodeValue">需要序列化节点的值</param>
         </member>
         <member name="T:AjaxFramework.ErrorMsg">
             <summary>
@@ -447,36 +595,35 @@
             继承该接口的类将会在编译时加载进程序集的缓存中 加速程序
             </summary>
         </member>
+        <member name="T:AjaxFramework.Extension.XmlSerializer.DictionaryXmlSerializer">
+            <summary>
+            字典类的XML序列化
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.Extension.XmlSerializer.DictionaryXmlSerializer.IsMatchType(System.Type)">
+            <summary>
+            判断是否属于字典类
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="F:AjaxFramework.Extension.XmlSerializer.DictionaryXmlSerializer._methodInfoCache">
+            <summary>
+            方法的缓存
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.Extension.XmlSerializer.DictionaryXmlSerializer.Serialize(System.IO.TextWriter,System.String,System.Object)">
+            <summary>
+            进行序列化操作
+            </summary>
+            <param name="tw"></param>
+            <param name="nodeName">序列化出来节点的名称  如果值为空的话  使用类型作为节点的名称</param>
+            <param name="nodeValue">需要序列化节点的值</param>
+        </member>
         <member name="T:AjaxFramework.Extension.GetRequestData.GetRequestEnumData">
             <summary>
             
             </summary>
-        </member>
-        <member name="T:AjaxFramework.Extension.GetRequestData.GetRequestDataStrategy">
-            <summary>
-            得到请求数据的一个抽象策略
-            </summary>
-        </member>
-        <member name="F:AjaxFramework.Extension.GetRequestData.GetRequestDataStrategy.bindingFlags">
-            <summary>
-            取方法的一些标志  实例成员 公开 有写功能
-            </summary>
-        </member>
-        <member name="M:AjaxFramework.Extension.GetRequestData.GetRequestDataStrategy.IsMatchType(System.Type)">
-            <summary>
-            是否是匹配上的类型
-            </summary>
-            <param name="paramType">指定的类型</param>
-            <returns>是的话返回true，否则，返回false</returns>
-        </member>
-        <member name="M:AjaxFramework.Extension.GetRequestData.GetRequestDataStrategy.GetValue(System.String,System.Type,AjaxFramework.HttpRequestDescription)">
-            <summary>
-            得到相应类型的值
-            </summary>
-            <param name="paramName">当前参数的名称</param>
-            <param name="paramType">当前参数的类型</param>
-            <param name="currentHttpRequest">当前的请求详情</param>
-            <returns></returns>
         </member>
         <member name="M:AjaxFramework.Extension.GetRequestData.GetRequestEnumData.IsMatchType(System.Type)">
             <summary>
@@ -632,6 +779,11 @@
             ajax请求的结果
             </summary>
         </member>
+        <member name="F:AjaxFramework.AjaxResult._keyValueDict">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:AjaxFramework.AjaxResult.ToString">
             <summary>
             重写该方法 将返回该实例的属性的键值对JSON
@@ -688,11 +840,11 @@
             输出数据的策略
             </summary>
         </member>
-        <member name="M:AjaxFramework.ResponseDataContext.#ctor(System.String)">
+        <member name="M:AjaxFramework.ResponseDataContext.#ctor(System.Web.HttpContext)">
             <summary>
             构造函数
             </summary>
-            <param name="contentType">输出文档类型</param>
+            <param name="context">请求的上下文</param>
         </member>
         <member name="M:AjaxFramework.ResponseDataContext.InitStrategy(System.String)">
             <summary>
@@ -884,6 +1036,66 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:AjaxFramework.Extension.XmlSerializer.JsonDataXmlSerializer">
+            <summary>
+            JsonData数据的序列化 为LitJson中的类型 如果不使用可以去除
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.Extension.XmlSerializer.JsonDataXmlSerializer.IsMatchType(System.Type)">
+            <summary>
+            判断是否属于JsonData
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.Extension.XmlSerializer.JsonDataXmlSerializer.Serialize(System.IO.TextWriter,System.String,System.Object)">
+            <summary>
+            进行序列化操作
+            </summary>
+            <param name="tw"></param>
+            <param name="nodeName">序列化出来节点的名称  如果值为空的话  会使用Table名称作为节点名，如果再为空 则去类型作为节点名</param>
+            <param name="nodeValue">需要序列化节点的值</param>
+        </member>
+        <member name="F:AjaxFramework.Extension.XmlSerializer.EntityXmlSerializer._indingFlags">
+            <summary>
+            取方法的一些标志  实例成员 公开 有读功能
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.Extension.XmlSerializer.EntityXmlSerializer.IsMatchType(System.Type)">
+            <summary>
+            判断是否属于HashTable类
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.Extension.XmlSerializer.EntityXmlSerializer.Serialize(System.IO.TextWriter,System.String,System.Object)">
+            <summary>
+            进行序列化操作
+            </summary>
+            <param name="tw"></param>
+            <param name="nodeName">序列化出来节点的名称  如果值为空的话  使用类型作为节点的名称</param>
+            <param name="nodeValue">需要序列化节点的值</param>
+        </member>
+        <member name="T:AjaxFramework.Extension.XmlSerializer.DataTableXmlSerializer">
+            <summary>
+            DataTable表的序列化
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.Extension.XmlSerializer.DataTableXmlSerializer.IsMatchType(System.Type)">
+            <summary>
+            判断是否属于DataTable
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.Extension.XmlSerializer.DataTableXmlSerializer.Serialize(System.IO.TextWriter,System.String,System.Object)">
+            <summary>
+            进行序列化操作
+            </summary>
+            <param name="tw"></param>
+            <param name="nodeName">序列化出来节点的名称  如果值为空的话  会使用Table名称作为节点名，如果再为空 则去类型作为节点名</param>
+            <param name="nodeValue">需要序列化节点的值</param>
+        </member>
         <member name="T:AjaxFramework.ResponseString">
             <summary>
             直接输出字符串
@@ -901,6 +1113,11 @@
             <param name="obj">要输出的值</param>
             <param name="type">要输出的类型</param>
             <returns></returns>
+        </member>
+        <member name="P:AjaxFramework.ResponseDataStrategy.CurrentContext">
+            <summary>
+            当前请求的上下文
+            </summary>
         </member>
         <member name="M:AjaxFramework.ResponseString.GetInstance">
             <summary>
@@ -966,6 +1183,27 @@
             <summary>
             初始化后的方法信息
             </summary>
+        </member>
+        <member name="T:AjaxFramework.Extension.XmlSerializer.ArrayXmlSerializer">
+            <summary>
+            判断是否是属于数组类  
+            <para>普通数组,List泛型,ArrayList</para>
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.Extension.XmlSerializer.ArrayXmlSerializer.IsMatchType(System.Type)">
+            <summary>
+            判断是否属于Array类
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.Extension.XmlSerializer.ArrayXmlSerializer.Serialize(System.IO.TextWriter,System.String,System.Object)">
+            <summary>
+            进行序列化操作
+            </summary>
+            <param name="tw"></param>
+            <param name="nodeName">序列化出来节点的名称  如果值为空的话  使用类型作为节点的名称</param>
+            <param name="nodeValue">需要序列化节点的值</param>
         </member>
         <member name="T:AjaxFramework.SampleDataExtension">
             <summary>
@@ -1050,7 +1288,31 @@
             当前请求的方法的详细信息
             </summary>
         </member>
+        <member name="M:AjaxFramework.ResponseFile.GetInstance">
+            <summary>
+            得到当前的实例
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.ResponseFile.GetResponse(System.Object,System.Type)">
+            <summary>
+            得到输出的数据
+            </summary>
+            <param name="obj">要输出的值</param>
+            <param name="type">要输出的类型</param>
+            <returns>返回Json字符串</returns>
+        </member>
         <!-- Badly formed XML comment ignored for member "T:AjaxFramework.Extension.GetRequestData.GetResquestListData" -->
+        <member name="F:AjaxFramework.Extension.GetRequestData.GetResquestListData.ADD_METHOD_NAME">
+            <summary>
+            添加方法的名称
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.Extension.GetRequestData.GetResquestListData._dictAddMethod">
+            <summary>
+            添加方法的缓存
+            </summary>
+        </member>
         <!-- Badly formed XML comment ignored for member "M:AjaxFramework.Extension.GetRequestData.GetResquestListData.IsMatchType(System.Type)" -->
         <member name="M:AjaxFramework.Extension.GetRequestData.GetResquestListData.GetValue(System.String,System.Type,AjaxFramework.HttpRequestDescription)">
             <summary>
@@ -1061,6 +1323,7 @@
             <param name="currentHttpRequest">当前的请求详情</param>
             <returns></returns>
         </member>
+        <!-- Badly formed XML comment ignored for member "M:AjaxFramework.Extension.GetRequestData.GetResquestListData.GetAddMethodInfo(System.Type)" -->
         <member name="T:AjaxFramework.CheckDate">
             <summary>
             检查时间
@@ -1099,6 +1362,46 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:AjaxFramework.Extension.XmlSerializer.SampleDataXmlSerializer">
+            <summary>
+            简单数据类型的序列化
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.Extension.XmlSerializer.SampleDataXmlSerializer.IsMatchType(System.Type)">
+            <summary>
+            判断是否属于简单数字类型
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.Extension.XmlSerializer.SampleDataXmlSerializer.Serialize(System.IO.TextWriter,System.String,System.Object)">
+            <summary>
+            进行序列化操作
+            </summary>
+            <param name="tw"></param>
+            <param name="nodeName">序列化出来节点的名称  如果值为空的话  使用类型作为节点的名称</param>
+            <param name="nodeValue">需要序列化节点的值</param>
+        </member>
+        <member name="T:AjaxFramework.Extension.XmlSerializer.EnumXmlSerializer">
+            <summary>
+            枚举类型的XML序列化
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.Extension.XmlSerializer.EnumXmlSerializer.IsMatchType(System.Type)">
+            <summary>
+            判断是否属于枚举类型
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AjaxFramework.Extension.XmlSerializer.EnumXmlSerializer.Serialize(System.IO.TextWriter,System.String,System.Object)">
+            <summary>
+            进行序列化操作
+            </summary>
+            <param name="tw"></param>
+            <param name="nodeName">序列化出来节点的名称  如果值为空的话  使用类型作为节点的名称</param>
+            <param name="nodeValue">需要序列化节点的值</param>
+        </member>
         <member name="T:AjaxFramework.Extension.GetRequestData.GetRequestEntityData">
             <summary>
             得到请求中的实体数据 最好别存在实体嵌套的情况
@@ -1112,6 +1415,27 @@
             <returns>true</returns>
         </member>
         <member name="M:AjaxFramework.Extension.GetRequestData.GetRequestEntityData.GetValue(System.String,System.Type,AjaxFramework.HttpRequestDescription)">
+            <summary>
+            得到实体类的值
+            </summary>
+            <param name="paramName">当前参数的名称</param>
+            <param name="paramType">当前参数的类型</param>
+            <param name="currentHttpRequest">当前的请求详情</param>
+            <returns></returns>
+        </member>
+        <member name="T:AjaxFramework.Extension.GetRequestData.GetRequestDescription">
+            <summary>
+            获取请求的详情 包括请求上下文 参数 请求具体的信息（程序集，特性等）
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.Extension.GetRequestData.GetRequestDescription.IsMatchType(System.Type)">
+            <summary>
+            是否是匹配类型 需要为HttpRequestDescription类型
+            </summary>
+            <param name="paramType">所需要判断的类型</param>
+            <returns>true</returns>
+        </member>
+        <member name="M:AjaxFramework.Extension.GetRequestData.GetRequestDescription.GetValue(System.String,System.Type,AjaxFramework.HttpRequestDescription)">
             <summary>
             得到实体类的值
             </summary>
@@ -1221,6 +1545,27 @@
             <param name="currentHttpRequest">当前的请求详情</param>
             <returns></returns>
         </member>
+        <member name="T:AjaxFramework.JsonpResult">
+            <summary>
+            返回的是Jsonp的结果
+            </summary>
+        </member>
+        <member name="M:AjaxFramework.JsonpResult.ToString">
+            <summary>
+            格式化成jsonp格式
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:AjaxFramework.JsonpResult.JsonpKey">
+            <summary>
+            Jsonp的键值
+            </summary>
+        </member>
+        <member name="P:AjaxFramework.JsonpResult.JsonpData">
+            <summary>
+            Jsonp的数据
+            </summary>
+        </member>
         <member name="T:AjaxFramework.CheckString">
             <summary>
             检查字符串
@@ -1284,6 +1629,23 @@
         <member name="P:AjaxFramework.ResponseHandler.CurrentMethodPathInfo">
             <summary>
             需要执行方法的一些路径信息
+            </summary>
+        </member>
+        <member name="T:AjaxFramework.InvokeCallbackEvent">
+            <summary>
+            调用方法回调的事件的委托
+            </summary>
+            <param name="ret">方法返回的内容</param>
+            <param name="context">调用时的上下文</param>
+        </member>
+        <member name="T:AjaxFramework.InvokeMethodCallback">
+            <summary>
+            回调调用方法
+            </summary>
+        </member>
+        <member name="F:AjaxFramework.InvokeMethodCallback.InvokeCallbackEventHandler">
+            <summary>
+            方法的事件
             </summary>
         </member>
     </members>

@@ -256,7 +256,9 @@ namespace LitJson
         public JsonData this[string prop_name] {
             get {
                 EnsureDictionary ();
-                return inst_object[prop_name];
+                if (inst_object.ContainsKey(prop_name))
+                    return inst_object[prop_name];
+                return null;
             }
 
             set {
@@ -309,7 +311,6 @@ namespace LitJson
             }
         }
         #endregion
-
 
         #region Constructors
         public JsonData ()
@@ -960,6 +961,39 @@ namespace LitJson
             }
 
             return "Uninitialized JsonData";
+        }
+
+        /// <summary>
+        /// get the type of actual value
+        /// </summary>
+        /// <returns></returns>
+        public Type GetValueType()
+        {
+            switch (type)
+            {
+                case JsonType.Array:
+                    return typeof(Array);
+
+                case JsonType.Boolean:
+                    return typeof(bool);
+
+                case JsonType.Double:
+                    return typeof(double);
+
+                case JsonType.Int:
+                    return typeof(int);
+
+                case JsonType.Long:
+                    return typeof(long);
+
+                case JsonType.Object:
+                    return typeof(IDictionary<string,JsonData>);
+
+                case JsonType.String:
+                    return typeof(string);
+            }
+
+            return typeof(object);
         }
     }
 

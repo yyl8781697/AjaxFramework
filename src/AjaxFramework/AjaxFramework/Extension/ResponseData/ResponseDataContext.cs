@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
 
 namespace AjaxFramework
 {
     /// <summary>
     /// 输出数据的上下文
     /// </summary>
-    public class ResponseDataContext
+    internal class ResponseDataContext
     {
         /// <summary>
         /// 输出数据的策略
@@ -18,10 +19,11 @@ namespace AjaxFramework
         /// <summary>
         /// 构造函数
         /// </summary>
-        /// <param name="contentType">输出文档类型</param>
-        public ResponseDataContext(string contentType)
+        /// <param name="context">请求的上下文</param>
+        public ResponseDataContext(HttpContext context)
         {
-            this.InitStrategy(contentType);
+            this.InitStrategy(context.Response.ContentType);
+            this._strategy.CurrentContext = context;
         }
 
         /// <summary>
@@ -44,7 +46,14 @@ namespace AjaxFramework
                 return;
             }
 
-            //其余 文本头部 图片头部 文件头部 只需直接输出文本均可
+            //表示输出图片或者文件格式的
+            if (contentType.StartsWith("image/", StringComparison.OrdinalIgnoreCase) || contentType.IndexOf("octet-stream", StringComparison.OrdinalIgnoreCase) > 0)
+            {
+                this._strategy = ResponseFile.GetInstance();
+                return;
+            }
+
+            //其余 只需直接输出文本均可
             this._strategy = ResponseString.GetInstance();
         }
 

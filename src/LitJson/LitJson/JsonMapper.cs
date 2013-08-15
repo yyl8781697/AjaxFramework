@@ -777,6 +777,7 @@ namespace LitJson
                     writer.WriteObjectEnd(); 
                 }
                 writer.WriteArrayEnd();
+                writer.ToCamelKey = false;
                 return;
             }
 

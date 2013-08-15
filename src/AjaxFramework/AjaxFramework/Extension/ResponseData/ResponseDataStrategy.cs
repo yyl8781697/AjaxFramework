@@ -2,14 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
 
 namespace AjaxFramework
 {
     /// <summary>
     /// 输出数据的一个抽象策略
     /// </summary>
-    public abstract class ResponseDataStrategy
+    internal abstract class ResponseDataStrategy
     {
+        /// <summary>
+        /// 当前请求的上下文
+        /// </summary>
+        public HttpContext CurrentContext { get; set; }
 
         /// <summary>
         /// 得到输出的数据

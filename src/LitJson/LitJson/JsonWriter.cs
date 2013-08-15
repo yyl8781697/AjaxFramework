@@ -157,9 +157,13 @@ namespace LitJson
                 break;
 
             case Condition.InObject:
-                if (! context.InObject || context.ExpectingValue)
+                    /**
+                     * modify at 2013-8-2 by yyl
+                     * action: comment on context.ExceptionValue
+                     */
+                if (! context.InObject /*|| context.ExpectingValue*/)
                     throw new JsonException (
-                        "Can't close an object here");
+                        "Can't close an object here"); 
                 break;
 
             case Condition.NotAProperty:
@@ -167,7 +171,7 @@ namespace LitJson
                     throw new JsonException (
                         "Expected a property");
                 break;
-
+                    
             case Condition.Property:
                 if (! context.InObject || context.ExpectingValue)
                     throw new JsonException (
@@ -323,7 +327,7 @@ namespace LitJson
         public void Reset ()
         {
             has_reached_end = false;
-
+            toCamelKey = false;
             ctx_stack.Clear ();
             context = new WriterContext ();
             ctx_stack.Push (context);

@@ -19,7 +19,19 @@ AjaxFramework-v1.4  --2013-6-20
 1:在标志接口IAjax接口继承了IDispose，并且框架内在执行完方法后会对此进行Dispose调用
 2:在接收到类型中 增加了对枚举值的支持
 3:修改方法返回值若为NULL，页面将显示  "返回值不能为空"的错误信息
-4：在返回异常时也同时转为unicode输出
 
+
+AjaxFramework-v1.4.1  --2013-6-30
+1：在返回异常时也同时转为unicode输出
+
+AjaxFramework-v1.4.2  --2013-7-9
+1:修复一旦在LitJosn中使用驼峰法转为之后 以后一直会使用驼峰法转换的现象
+2:针对方法参数添加了HttpContext类型的支持，用于当前框架类型无法满足开发者或者开发者需要用请求里面的数据的情况
+3:修复在特性WebMethodAttr只设置输出类型情况下 指定的类型会被Json类型写死
+
+AjaxFramework-v1.5  --2013-8-15
+1:在原接收类型中添加了对List<T>泛型类的支持，此类型将需要以JSON数组的类型传值才可以正常接收（与BatchJson方式不同的时，他JSON数组每条json对象不带状态）
+2:针对方法参数添加了GetRequestDescription类型的支持，用于当前框架内部的一些详细请求的修改  多用于 动态修改输出方式
+3:自己重写Xml序列化引擎，替换Ms自带的XmlSerializer
 
 

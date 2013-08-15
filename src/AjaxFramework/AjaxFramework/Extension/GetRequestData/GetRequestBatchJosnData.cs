@@ -56,9 +56,9 @@ namespace AjaxFramework.Extension.GetRequestData
         public override object GetValue(string paramName, Type paramType, HttpRequestDescription currentHttpRequest)
         {
             base.GetValue(paramName, paramType, currentHttpRequest);
-            Type type = paramType.GetGenericArguments()[0];
-            string json = currentHttpRequest.WebParameters[paramName];
-            if (string.IsNullOrEmpty(json))
+            Type type = paramType.GetGenericArguments()[0];//得到泛型的具体类型
+            string jsonList = currentHttpRequest.WebParameters[paramName];//得到json的传参
+            if (string.IsNullOrEmpty(jsonList))
             {
                 return null;
             }
@@ -69,7 +69,7 @@ namespace AjaxFramework.Extension.GetRequestData
             var batchJson = typeof(BatchJson<>).MakeGenericType(type).CreateInstace();//动态创建所指定的泛型类型
             MethodInfo addMethod = GetAddMethodInfo(typeof(BatchJson<>).MakeGenericType(type));//得到batch泛型的添加方法
 
-            JsonData jsonData = JsonMapper.ToObject(json);//反序列化Json数据得到JsonData
+            JsonData jsonData = JsonMapper.ToObject(jsonList);//反序列化Json数组数据得到JsonData
             for (int i = 0, count = jsonData.Count; i < count; i++)
             {
                 //如果反序列化得到的数据位object 型，在litJson中为Dict型
@@ -119,7 +119,7 @@ namespace AjaxFramework.Extension.GetRequestData
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public MethodInfo GetAddMethodInfo(Type type)
+        private MethodInfo GetAddMethodInfo(Type type)
         {
             if (type == null)
             {

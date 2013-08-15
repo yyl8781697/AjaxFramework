@@ -5,12 +5,14 @@ using System.Text;
 using System.Xml.Serialization;
 using System.IO;
 
+using AjaxFramework.Extension.XmlSerializer;
+
 namespace AjaxFramework
 {
     /// <summary>
     /// 是输出xml类型的
     /// </summary>
-    public class ResponseXml:ResponseDataStrategy
+    internal class ResponseXml:ResponseDataStrategy
     {
 
         private static ResponseXml _instance = null;
@@ -37,22 +39,29 @@ namespace AjaxFramework
         {
             base.GetResponse(obj, type);
 
+            if (type == typeof(object))
+            {
+                //如果类型是object  尝试取他实际的类型
+                type = obj.GetType();
+            }
+
             StringBuilder sb = new StringBuilder();//字符流
             TextWriter writer = new StringWriter(sb);//IO写的载体
-            XmlSerializer serializer;//序列化对象
+            XmlSerializerContext serializerContext;//序列化对象
             try
             {
                 //声明Xml序列化对象实例serializer
-                serializer = new XmlSerializer(type);
+                serializerContext = new XmlSerializerContext(writer, type);
                 //执行序列化并将序列化结果输出到writer
-                serializer.Serialize(writer, obj);
+                serializerContext.Serialize(obj);
             }
             catch (Exception ex)
             {
-                //声明针对string的Xml序列化对象实例serializer
-                serializer = new XmlSerializer(typeof(string));
-                //执行序列化并将序列化结果输出到writer
-                serializer.Serialize(writer, ex.Message);
+                writer.Close();
+                sb = new StringBuilder();
+                writer = new StringWriter(sb);
+                serializerContext = new XmlSerializerContext(writer, type);
+                serializerContext.Serialize(ex.Message);
             }
             finally
             {
@@ -62,5 +71,7 @@ namespace AjaxFramework
 
             return sb.ToString();
         }
+
+
     }
 }

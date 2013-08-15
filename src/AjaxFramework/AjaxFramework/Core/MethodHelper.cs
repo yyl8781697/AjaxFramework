@@ -49,8 +49,6 @@ namespace AjaxFramework
         /// <param name="methodPathInfo">方法的相关路径信息</param>
         public MethodHelper(HttpContext context, MethodPathInfo methodPathInfo)
         {
-            object obj = context.Session;
-            object obj2 = System.Web.HttpContext.Current.Session;
             if (context == null)
             {
                 throw new AjaxException("没有得到当前上下文");
@@ -177,12 +175,20 @@ namespace AjaxFramework
                 if (ex.InnerException != null)
                 {
                     //如果捕获到的异常有内部错误，则抛出此内部错误
-                    throw ex.InnerException;
+                    ex=ex.InnerException;
                 }
                 //否则直接抛异常错误
+                ret = ex;
                 throw ex;
             }
             finally {
+                //指定了调用方法的回调
+                if (InvokeMethodCallback.InvokeCallbackEventHandler != null)
+                {
+                    //指定该回调
+                    InvokeMethodCallback.InvokeCallbackEventHandler(ret, this._context);
+                }
+
                 if (newInstance is IAjax)
                 {
                     //将当前新实例给释放掉
@@ -192,9 +198,6 @@ namespace AjaxFramework
             return ret;
         }
         #endregion
-
-        
-
 
     }
 }

@@ -29,9 +29,23 @@ namespace AjaxFramework
         public string ErrorMsg { get; set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public IDictionary<string, string> _keyValueDict;
+        /// <summary>
         /// 额外的一些键值对的数据 一般情况下是不需要了
         /// </summary>
-        public IDictionary<string, string> KeyValueDict { get; set; }
+        public IDictionary<string, string> KeyValueDict { get {
+            if (this._keyValueDict == null)
+            {
+                this._keyValueDict = new Dictionary<string, string>();
+            }
+            return this._keyValueDict;
+        }
+            set {
+                this._keyValueDict = value;
+            }
+        }
 
         /// <summary>
         /// 重写该方法 将返回该实例的属性的键值对JSON
@@ -101,7 +115,9 @@ namespace AjaxFramework
                 if (System.Text.RegularExpressions.Regex.IsMatch(str[i].ToString(), @"[\u4e00-\u9fa5，。！“”；]"))
                 {
                     sb.Append(@"\u" + ((int)str[i]).ToString("x"));
-
+                }
+                else {
+                    sb.Append(str[i]);
                 }
             }
             return sb.ToString();

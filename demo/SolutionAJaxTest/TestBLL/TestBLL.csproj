@@ -50,6 +50,10 @@
       <Project>{4FE4B3B9-58AC-449E-9FC9-71121D478CE4}</Project>
       <Name>AjaxFramework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\src\LitJson\LitJson\LitJson.csproj">
+      <Project>{517DF037-79B2-43DE-BB2D-4D46643E4E1B}</Project>
+      <Name>LitJson</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

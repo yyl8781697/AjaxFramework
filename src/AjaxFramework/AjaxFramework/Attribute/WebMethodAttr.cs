@@ -32,6 +32,7 @@ namespace AjaxFramework
             get;
             set;
         }
+
         #endregion
 
         #region 构造函数
@@ -65,7 +66,7 @@ namespace AjaxFramework
         public WebMethodAttr(string contentType)
         {
             CurRequestType = RequestType.Post;
-            CurContentType = ContentType.JSON;
+            CurContentType = contentType;
             base.PriorityLevel = 9999;
         }
 
@@ -92,7 +93,7 @@ namespace AjaxFramework
         {
             base.IsValidate();
             bool ret = false;
-
+            
             if (RequestType.All.Equals(this.CurRequestType))
             {
                 ret = true;

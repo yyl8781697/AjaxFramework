@@ -9,7 +9,7 @@ namespace AjaxFramework
     /// <summary>
     /// 直接输出字符串
     /// </summary>
-    public class ResponseString : ResponseDataStrategy
+    internal class ResponseString : ResponseDataStrategy
     {
         private static ResponseString _instance = null;
         /// <summary>
@@ -38,6 +38,12 @@ namespace AjaxFramework
             string ret = string.Empty;
             try
             {
+                if (type == typeof(object))
+                {
+                    //如果类型是object  尝试取他实际的类型
+                    type = obj.GetType();
+                }
+
                 if (type.IsSampleType())
                 {
                     //返回的是简单类型
@@ -47,9 +53,12 @@ namespace AjaxFramework
                 {
                     ret = (obj as AjaxResult).ToText();
                 }
+                else if (obj is JsonpResult)
+                {
+                    ret = (obj as JsonpResult).ToString();
+                }
                 else
                 {
-
                     ret = JsonMapper.ToJson(obj);
                 }
             }
