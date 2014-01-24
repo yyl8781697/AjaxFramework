@@ -15,7 +15,7 @@ namespace AjaxFramework
         public IHttpHandler GetHandler(HttpContext context,
                         string requestType, string virtualPath, string physicalPath)
         {
-            return new ResponseHandler(virtualPath);
+            return new ResponseHandler(context.Request.AppRelativeCurrentExecutionFilePath);
         }
 
         public void ReleaseHandler(IHttpHandler handler)
