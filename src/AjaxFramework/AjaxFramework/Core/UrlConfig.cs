@@ -13,7 +13,7 @@ namespace AjaxFramework
     internal class UrlConfig
     {
 
-        public static readonly string REGEX_TEXT = @"^/(?<classname>\w{1,30})[\.|/](?<methodname>\w{1,30})[\.](\w{1,6})$";
+        public static readonly string REGEX_TEXT = @"^[~]?/(?<classname>\w{1,30})[\.|/](?<methodname>\w{1,30})[\.](\w{1,6})$";
 
         /// <summary>
         /// ajax执行的业务类所在的程序集 默认自己的 有一个测试的
